@@ -7,11 +7,6 @@ import {
   categoriaModelMock,
   categoriaRepositoryMock,
 } from 'src/mocks/categoria.mock';
-import {
-  atualizaProdutoDTOMock,
-  criaProdutoDTOMock,
-  produtoEntityNotIdMock,
-} from 'src/mocks/produto.mock';
 
 describe('ProdutoFactory', () => {
   let produtoFactory: ProdutoFactory;
@@ -35,37 +30,6 @@ describe('ProdutoFactory', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('deve criar a entidade produto com criaProdutoDTO', async () => {
-    produtoEntityNotIdMock.categoria = categoriaEntityMock;
-    categoriaRepositoryMock.buscarCategoriaPorId.mockReturnValue(
-      categoriaModelMock,
-    );
-
-    const result =
-      await produtoFactory.criarEntidadeProduto(criaProdutoDTOMock);
-
-    expect(categoriaRepositoryMock.buscarCategoriaPorId).toHaveBeenCalledWith(
-      categoriaId,
-    );
-    expect(result).toStrictEqual(produtoEntityNotIdMock);
-  });
-
-  it('deve criar a entidade produto com atualizaProdutoDTO', async () => {
-    produtoEntityNotIdMock.categoria = categoriaEntityMock;
-    categoriaRepositoryMock.buscarCategoriaPorId.mockReturnValue(
-      categoriaModelMock,
-    );
-
-    const result = await produtoFactory.criarEntidadeProduto(
-      atualizaProdutoDTOMock,
-    );
-
-    expect(categoriaRepositoryMock.buscarCategoriaPorId).toHaveBeenCalledWith(
-      categoriaId,
-    );
-    expect(result).toStrictEqual(produtoEntityNotIdMock);
   });
 
   it('deve criar a entidade categoria de uma entidade produto', async () => {

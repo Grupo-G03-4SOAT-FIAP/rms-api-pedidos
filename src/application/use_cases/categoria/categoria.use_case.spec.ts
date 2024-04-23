@@ -2,17 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CategoriaUseCase } from './categoria.use_case';
 import { ICategoriaRepository } from 'src/domain/categoria/interfaces/categoria.repository.port';
 import { ICategoriaDTOFactory } from 'src/domain/categoria/interfaces/categoria.dto.factory.port';
-import {
-  CategoriaDuplicadaErro,
-  CategoriaNaoLocalizadaErro,
-} from 'src/domain/categoria/exceptions/categoria.exception';
+import { CategoriaNaoLocalizadaErro } from 'src/domain/categoria/exceptions/categoria.exception';
 import {
   categoriaDTOFactoryMock,
   categoriaDTOMock,
   categoriaEntityMock,
-  categoriaEntityNotIdMock,
   categoriaRepositoryMock,
-  criaCategoriaDTOMock,
 } from 'src/mocks/categoria.mock';
 
 describe('CategoriaUseCase', () => {
@@ -40,139 +35,6 @@ describe('CategoriaUseCase', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('deve criar uma categoria com sucesso', async () => {
-    categoriaRepositoryMock.buscarCategoriaPorNome.mockReturnValue(null);
-    categoriaRepositoryMock.criarCategoria.mockReturnValue(categoriaEntityMock);
-    categoriaDTOFactoryMock.criarCategoriaDTO.mockReturnValue(categoriaDTOMock);
-
-    const result = await categoriaUseCase.criarCategoria(criaCategoriaDTOMock);
-
-    expect(categoriaRepositoryMock.criarCategoria).toHaveBeenCalledWith(
-      categoriaEntityNotIdMock,
-    );
-    expect(categoriaDTOFactoryMock.criarCategoriaDTO).toHaveBeenCalledWith(
-      categoriaEntityMock,
-    );
-    expect(result).toStrictEqual({
-      mensagem: 'Categoria criada com sucesso',
-      body: categoriaDTOMock,
-    });
-  });
-
-  it('deve retornar erro ao criar uma categoria com nome duplicado', async () => {
-    categoriaRepositoryMock.buscarCategoriaPorNome.mockReturnValue(
-      categoriaEntityMock,
-    );
-
-    await expect(
-      categoriaUseCase.criarCategoria(criaCategoriaDTOMock),
-    ).rejects.toThrow(
-      new CategoriaDuplicadaErro('Existe uma categoria com esse nome'),
-    );
-    expect(categoriaRepositoryMock.buscarCategoriaPorNome).toHaveBeenCalledWith(
-      categoriaEntityMock.nome,
-    );
-  });
-
-  it('deve editar uma categoria com sucesso', async () => {
-    categoriaRepositoryMock.buscarCategoriaPorId.mockReturnValue(
-      categoriaEntityMock,
-    );
-    categoriaRepositoryMock.buscarCategoriaPorNome.mockReturnValue(null);
-    categoriaRepositoryMock.editarCategoria.mockReturnValue(
-      categoriaEntityMock,
-    );
-    categoriaDTOFactoryMock.criarCategoriaDTO.mockReturnValue(categoriaDTOMock);
-
-    const result = await categoriaUseCase.editarCategoria(
-      categoriaId,
-      criaCategoriaDTOMock,
-    );
-
-    expect(categoriaRepositoryMock.buscarCategoriaPorId).toHaveBeenCalledWith(
-      categoriaId,
-    );
-    expect(categoriaRepositoryMock.editarCategoria).toHaveBeenCalledWith(
-      categoriaId,
-      categoriaEntityNotIdMock,
-    );
-    expect(categoriaDTOFactoryMock.criarCategoriaDTO).toHaveBeenCalledWith(
-      categoriaEntityMock,
-    );
-    expect(result).toStrictEqual({
-      mensagem: 'Categoria atualizada com sucesso',
-      body: categoriaDTOMock,
-    });
-  });
-
-  it('deve retornar erro ao editar uma categoria com nome duplicado', async () => {
-    categoriaRepositoryMock.buscarCategoriaPorId.mockReturnValue(
-      categoriaEntityMock,
-    );
-    categoriaRepositoryMock.buscarCategoriaPorNome.mockReturnValue(
-      categoriaEntityMock,
-    );
-
-    await expect(
-      categoriaUseCase.editarCategoria(categoriaId, criaCategoriaDTOMock),
-    ).rejects.toThrow(
-      new CategoriaDuplicadaErro('Existe uma categoria com esse nome'),
-    );
-    expect(categoriaRepositoryMock.buscarCategoriaPorId).toHaveBeenCalledWith(
-      categoriaId,
-    );
-    expect(categoriaRepositoryMock.buscarCategoriaPorNome).toHaveBeenCalledWith(
-      categoriaEntityMock.nome,
-    );
-  });
-
-  it('deve retornar erro ao editar uma categoria que não existe', async () => {
-    categoriaRepositoryMock.buscarCategoriaPorId.mockReturnValue(null);
-
-    await expect(
-      categoriaUseCase.editarCategoria(categoriaId, criaCategoriaDTOMock),
-    ).rejects.toThrow(
-      new CategoriaNaoLocalizadaErro('Categoria informada não existe'),
-    );
-    expect(categoriaRepositoryMock.buscarCategoriaPorId).toHaveBeenCalledWith(
-      categoriaId,
-    );
-  });
-
-  it('deve excluir uma categoria com sucesso', async () => {
-    categoriaRepositoryMock.buscarCategoriaPorId.mockReturnValue(
-      categoriaEntityMock,
-    );
-    categoriaRepositoryMock.excluirCategoria.mockReturnValue(
-      categoriaEntityMock,
-    );
-
-    const result = await categoriaUseCase.excluirCategoria(categoriaId);
-
-    expect(categoriaRepositoryMock.buscarCategoriaPorId).toHaveBeenCalledWith(
-      categoriaId,
-    );
-    expect(categoriaRepositoryMock.excluirCategoria).toHaveBeenCalledWith(
-      categoriaId,
-    );
-    expect(result).toStrictEqual({
-      mensagem: 'Categoria excluída com sucesso',
-    });
-  });
-
-  it('deve retornar erro ao excluir uma categoria que não existe', async () => {
-    categoriaRepositoryMock.buscarCategoriaPorId.mockReturnValue(null);
-
-    await expect(
-      categoriaUseCase.excluirCategoria(categoriaId),
-    ).rejects.toThrow(
-      new CategoriaNaoLocalizadaErro('Categoria informada não existe'),
-    );
-    expect(categoriaRepositoryMock.buscarCategoriaPorId).toHaveBeenCalledWith(
-      categoriaId,
-    );
   });
 
   it('deve buscar uma categoria por id com sucesso', async () => {

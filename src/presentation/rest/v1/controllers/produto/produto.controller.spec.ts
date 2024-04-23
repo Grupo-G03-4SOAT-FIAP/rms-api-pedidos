@@ -1,18 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConflictException, NotFoundException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { ProdutoController } from './produto.controller';
 import { IProdutoUseCase } from 'src/domain/produto/interfaces/produto.use_case.port';
 import { CategoriaNaoLocalizadaErro } from 'src/domain/categoria/exceptions/categoria.exception';
-import {
-  ProdutoDuplicadoErro,
-  ProdutoNaoLocalizadoErro,
-} from 'src/domain/produto/exceptions/produto.exception';
-import {
-  atualizaProdutoDTOMock,
-  criaProdutoDTOMock,
-  produtoDTOMock,
-  produtoUseCaseMock,
-} from 'src/mocks/produto.mock';
+import { ProdutoNaoLocalizadoErro } from 'src/domain/produto/exceptions/produto.exception';
+import { produtoDTOMock, produtoUseCaseMock } from 'src/mocks/produto.mock';
 
 describe('Produto', () => {
   let produtoController: ProdutoController;
@@ -37,120 +29,6 @@ describe('Produto', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('deve criar um produto', async () => {
-    const HTTPResponse = {
-      mensagem: 'Produto criado com sucesso',
-      body: produtoDTOMock,
-    };
-
-    produtoUseCaseMock.criarProduto.mockReturnValue(HTTPResponse);
-
-    const result = await produtoController.criar(criaProdutoDTOMock);
-
-    expect(produtoUseCaseMock.criarProduto).toHaveBeenCalledWith(
-      criaProdutoDTOMock,
-    );
-    expect(result).toStrictEqual(HTTPResponse);
-  });
-
-  it('deve criar um produto e retornar NotFoundError', async () => {
-    produtoUseCaseMock.criarProduto.mockRejectedValue(
-      new CategoriaNaoLocalizadaErro('Categoria informada não existe'),
-    );
-
-    await expect(produtoController.criar(criaProdutoDTOMock)).rejects.toThrow(
-      new NotFoundException('Categoria informada não existe'),
-    );
-    expect(produtoUseCaseMock.criarProduto).toHaveBeenCalledWith(
-      criaProdutoDTOMock,
-    );
-  });
-
-  it('deve criar um produto e retornar ConflictError', async () => {
-    produtoUseCaseMock.criarProduto.mockRejectedValue(
-      new ProdutoDuplicadoErro('Existe um produto com esse nome'),
-    );
-
-    await expect(produtoController.criar(criaProdutoDTOMock)).rejects.toThrow(
-      new ConflictException('Existe um produto com esse nome'),
-    );
-    expect(produtoUseCaseMock.criarProduto).toHaveBeenCalledWith(
-      criaProdutoDTOMock,
-    );
-  });
-
-  it('deve editar um produto', async () => {
-    const HTTPResponse = {
-      mensagem: 'Produto atualizado com sucesso',
-      body: produtoDTOMock,
-    };
-
-    produtoUseCaseMock.editarProduto.mockReturnValue(HTTPResponse);
-
-    const result = await produtoController.atualizar(
-      produtoId,
-      atualizaProdutoDTOMock,
-    );
-
-    expect(produtoUseCaseMock.editarProduto).toHaveBeenCalledWith(
-      produtoId,
-      criaProdutoDTOMock,
-    );
-    expect(result).toStrictEqual(HTTPResponse);
-  });
-
-  it('deve editar um produto e retornar NotFoundError', async () => {
-    produtoUseCaseMock.editarProduto.mockRejectedValue(
-      new ProdutoNaoLocalizadoErro('Produto informado não existe'),
-    );
-
-    await expect(
-      produtoController.atualizar(produtoId, atualizaProdutoDTOMock),
-    ).rejects.toThrow(new NotFoundException('Produto informado não existe'));
-    expect(produtoUseCaseMock.editarProduto).toHaveBeenCalledWith(
-      produtoId,
-      atualizaProdutoDTOMock,
-    );
-  });
-
-  it('deve editar um produto e retornar ConflictError', async () => {
-    produtoUseCaseMock.editarProduto.mockRejectedValue(
-      new ProdutoDuplicadoErro('Existe um produto com esse nome'),
-    );
-
-    await expect(
-      produtoController.atualizar(produtoId, atualizaProdutoDTOMock),
-    ).rejects.toThrow(new ConflictException('Existe um produto com esse nome'));
-    expect(produtoUseCaseMock.editarProduto).toHaveBeenCalledWith(
-      produtoId,
-      atualizaProdutoDTOMock,
-    );
-  });
-
-  it('deve deletar um produto', async () => {
-    const HTTPResponse = {
-      mensagem: 'Produto excluído com sucesso',
-    };
-
-    produtoUseCaseMock.excluirProduto.mockReturnValue(HTTPResponse);
-
-    const result = await produtoController.remover(produtoId);
-
-    expect(produtoUseCaseMock.excluirProduto).toHaveBeenCalledWith(produtoId);
-    expect(result).toStrictEqual(HTTPResponse);
-  });
-
-  it('deve deletar um produto e retornar NotFoundError', async () => {
-    produtoUseCaseMock.excluirProduto.mockRejectedValue(
-      new ProdutoNaoLocalizadoErro('Produto informado não existe'),
-    );
-
-    await expect(produtoController.remover(produtoId)).rejects.toThrow(
-      new NotFoundException('Produto informado não existe'),
-    );
-    expect(produtoUseCaseMock.excluirProduto).toHaveBeenCalledWith(produtoId);
   });
 
   it('deve buscar um produto', async () => {

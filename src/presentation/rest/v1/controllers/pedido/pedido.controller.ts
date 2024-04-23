@@ -60,10 +60,10 @@ export class PedidoController {
     @Body() criaPedidoDTO: CriaPedidoDTO,
   ) {
     const criaClienteDTO = new CriaClienteDTO();
-      criaPedidoDTO.cpfCliente = username;
-      criaClienteDTO.nome = name;
-      criaClienteDTO.email = email;
-      criaClienteDTO.cpf = username;
+    criaPedidoDTO.cpfCliente = username;
+    criaClienteDTO.nome = name;
+    criaClienteDTO.email = email;
+    criaClienteDTO.cpf = username;
     try {
       return await this.pedidoUseCase.criarPedido(
         criaClienteDTO,

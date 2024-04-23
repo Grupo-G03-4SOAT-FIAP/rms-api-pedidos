@@ -1,12 +1,7 @@
 import { Repository } from 'typeorm';
-import { faker } from '@faker-js/faker';
 import { produtoModelMock } from './produto.mock';
 import { CategoriaEntity } from 'src/domain/categoria/entities/categoria.entity';
-import {
-  AtualizaCategoriaDTO,
-  CategoriaDTO,
-  CriaCategoriaDTO,
-} from 'src/presentation/rest/v1/presenters/categoria/categoria.dto';
+import { CategoriaDTO } from 'src/presentation/rest/v1/presenters/categoria/categoria.dto';
 import { CategoriaModel } from 'src/infrastructure/sql/models/categoria.model';
 
 // Mock para simular dados da tabela categoria no banco de dados
@@ -34,16 +29,6 @@ export const categoriaEntityNotIdMock = new CategoriaEntity(
 
 // Mock para simular dados da entidade categoria sem descricao
 export const categoriaEntityNotDescricaoMock = new CategoriaEntity('Lanche');
-
-// Mock para simular o DTO com os dados recebidos pelo usuario ao criar uma categoria
-export const criaCategoriaDTOMock = new CriaCategoriaDTO();
-criaCategoriaDTOMock.nome = categoriaModelMock.nome;
-criaCategoriaDTOMock.descricao = categoriaModelMock.descricao;
-
-// Mock para simular o DTO com os dados recebidos pelo usuario ao atualizar uma categoria
-export const atualizaCategoriaDTOMock = new AtualizaCategoriaDTO();
-atualizaCategoriaDTOMock.nome = categoriaModelMock.nome;
-atualizaCategoriaDTOMock.descricao = categoriaModelMock.descricao;
 
 // Mock para simular o DTO com dados de categoria enviados para o usuario ao responder uma requisição
 export const categoriaDTOMock = new CategoriaDTO();
@@ -92,11 +77,4 @@ export const categoriaUseCaseMock = {
   excluirCategoria: jest.fn(),
   buscarCategoria: jest.fn(),
   listarCategorias: jest.fn(),
-};
-
-export const criarFakeCategoriaDTO = (): CriaCategoriaDTO => {
-  const criaCategoriaDTO = new CriaCategoriaDTO();
-  criaCategoriaDTO.nome = `Categoria ${faker.string.uuid()}`;
-  criaCategoriaDTO.descricao = `Descricão ${faker.string.uuid()}`;
-  return criaCategoriaDTO;
 };
