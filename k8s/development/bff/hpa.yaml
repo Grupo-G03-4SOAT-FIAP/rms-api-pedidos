@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: rms-api-monolito
+  name: rms-api-pedidos
   namespace: rms
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: rms-api-monolito # name do Deployment a ser escalado automaticamente pelo HPA
+    name: rms-api-pedidos # name do Deployment a ser escalado automaticamente pelo HPA
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
