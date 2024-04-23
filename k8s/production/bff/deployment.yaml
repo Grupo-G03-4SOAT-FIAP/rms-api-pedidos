@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rms-api-monolito
+  name: rms-api-pedidos
   namespace: rms
   labels:
-    app: rms-api-monolito
+    app: rms-api-pedidos
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: rms-api-monolito
+      app: rms-api-pedidos
   template:
     metadata:
       labels:
-        app: rms-api-monolito
+        app: rms-api-pedidos
     spec:
       serviceAccountName: aws-iam-serviceaccount # ServiceAccount com Role que permite acesso ao AWS Secrets Manager
       automountServiceAccountToken: false
@@ -25,11 +25,11 @@ spec:
             volumeAttributes:
               secretProviderClass: aws-secrets
       containers:
-        - name: rms-api-monolito
+        - name: rms-api-pedidos
           image: 900534935988.dkr.ecr.us-east-1.amazonaws.com/rms:latest
           envFrom:
             - configMapRef:
-                name: rms-api-monolito-config
+                name: rms-api-pedidos-config
           volumeMounts:
             - name: secrets-store-inline
               mountPath: "/mnt/secrets-store"
