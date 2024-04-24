@@ -15,48 +15,6 @@ export class ProdutoRepository implements IProdutoRepository {
     private readonly produtoRepository: Repository<ProdutoModel>,
   ) {}
 
-  async criarProduto(produto: ProdutoEntity): Promise<ProdutoEntity> {
-    const produtoExistente = await this.produtoRepository.findOne({
-      where: { nome: produto.nome },
-      withDeleted: true,
-    });
-
-    if (produtoExistente) {
-      await this.produtoRepository.restore({ id: produtoExistente.id });
-      const produtoRestaurado = await this.produtoRepository.findOne({
-        where: { id: produtoExistente.id },
-        relations: this.relations,
-      });
-
-      return this.sqlDTOFactory.criarProdutoDTO(produtoRestaurado);
-    } else {
-      const produtoModel = this.produtoRepository.create(produto);
-      await this.produtoRepository.save(produtoModel);
-      return this.sqlDTOFactory.criarProdutoDTO(produtoModel);
-    }
-  }
-
-  async editarProduto(
-    produtoId: string,
-    produto: ProdutoEntity,
-  ): Promise<ProdutoEntity> {
-    const produtoModel = this.produtoRepository.create(produto);
-    await this.produtoRepository.update(produtoId, produtoModel);
-
-    const produtoModelAtualizado = await this.produtoRepository.findOne({
-      where: { id: produtoId },
-      relations: this.relations, // Especifica a relação que você deseja incluir
-    });
-    if (produtoModelAtualizado) {
-      return this.sqlDTOFactory.criarProdutoDTO(produtoModelAtualizado);
-    }
-    return null;
-  }
-
-  async excluirProduto(produtoId: string): Promise<void> {
-    await this.produtoRepository.softDelete({ id: produtoId });
-  }
-
   async buscarProdutoPorId(produtoId: string): Promise<ProdutoEntity | null> {
     const produtoModel = await this.produtoRepository.findOne({
       where: { id: produtoId },

@@ -4,17 +4,11 @@ import { IProdutoRepository } from 'src/domain/produto/interfaces/produto.reposi
 import { ICategoriaRepository } from 'src/domain/categoria/interfaces/categoria.repository.port';
 import { IProdutoFactory } from 'src/domain/produto/interfaces/produto.factory.port';
 import { IProdutoDTOFactory } from 'src/domain/produto/interfaces/produto.dto.factory.port';
-import {
-  ProdutoDuplicadoErro,
-  ProdutoNaoLocalizadoErro,
-} from 'src/domain/produto/exceptions/produto.exception';
+import { ProdutoNaoLocalizadoErro } from 'src/domain/produto/exceptions/produto.exception';
 import { CategoriaNaoLocalizadaErro } from 'src/domain/categoria/exceptions/categoria.exception';
 import {
-  atualizaProdutoDTOMock,
-  criaProdutoDTOMock,
   produtoDTOFactoryMock,
   produtoDTOMock,
-  produtoEntityNotIdMock,
   produtoFactoryMock,
   produtoModelMock,
   produtoRepositoryMock,
@@ -59,150 +53,6 @@ describe('ProdutoUseCase', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('deve criar um produto com sucesso', async () => {
-    produtoFactoryMock.criarEntidadeProduto.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-    produtoRepositoryMock.criarProduto.mockReturnValue(produtoModelMock);
-    produtoDTOFactoryMock.criarProdutoDTO.mockReturnValue(produtoDTOMock);
-
-    const result = await produtoUseCase.criarProduto(criaProdutoDTOMock);
-
-    expect(produtoFactoryMock.criarEntidadeProduto).toHaveBeenCalledWith(
-      criaProdutoDTOMock,
-    );
-    expect(produtoRepositoryMock.criarProduto).toHaveBeenCalledWith(
-      produtoEntityNotIdMock,
-    );
-    expect(produtoDTOFactoryMock.criarProdutoDTO).toHaveBeenCalledWith(
-      produtoModelMock,
-    );
-    expect(result).toStrictEqual({
-      mensagem: 'Produto criado com sucesso',
-      body: produtoDTOMock,
-    });
-  });
-
-  it('deve retornar erro ao criar um produto com nome duplicado', async () => {
-    produtoFactoryMock.criarEntidadeProduto.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-    produtoRepositoryMock.buscarProdutoPorNome.mockReturnValue(
-      produtoModelMock,
-    );
-
-    await expect(
-      produtoUseCase.criarProduto(criaProdutoDTOMock),
-    ).rejects.toThrow(
-      new ProdutoDuplicadoErro('Existe um produto com esse nome'),
-    );
-    expect(produtoRepositoryMock.buscarProdutoPorNome).toHaveBeenCalledWith(
-      produtoEntityNotIdMock.nome,
-    );
-  });
-
-  it('deve editar um produto com sucesso', async () => {
-    produtoFactoryMock.criarEntidadeProduto.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-    produtoRepositoryMock.buscarProdutoPorId.mockReturnValue(produtoModelMock);
-    produtoRepositoryMock.buscarProdutoPorNome.mockReturnValue(null);
-    produtoRepositoryMock.editarProduto.mockReturnValue(produtoModelMock);
-    produtoDTOFactoryMock.criarProdutoDTO.mockReturnValue(produtoDTOMock);
-
-    const result = await produtoUseCase.editarProduto(
-      produtoId,
-      atualizaProdutoDTOMock,
-    );
-
-    expect(produtoFactoryMock.criarEntidadeProduto).toHaveBeenCalledWith(
-      atualizaProdutoDTOMock,
-    );
-    expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalledWith(
-      produtoId,
-    );
-    expect(produtoRepositoryMock.buscarProdutoPorNome).toHaveBeenCalledWith(
-      produtoEntityNotIdMock.nome,
-    );
-    expect(produtoRepositoryMock.editarProduto).toHaveBeenCalledWith(
-      produtoId,
-      produtoEntityNotIdMock,
-    );
-    expect(produtoDTOFactoryMock.criarProdutoDTO).toHaveBeenCalledWith(
-      produtoModelMock,
-    );
-    expect(result).toStrictEqual({
-      mensagem: 'Produto atualizado com sucesso',
-      body: produtoDTOMock,
-    });
-  });
-
-  it('deve retornar erro ao editar um produto que não existe', async () => {
-    produtoFactoryMock.criarEntidadeProduto.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-    produtoRepositoryMock.buscarProdutoPorId.mockReturnValue(null);
-
-    await expect(
-      produtoUseCase.editarProduto(produtoId, atualizaProdutoDTOMock),
-    ).rejects.toThrow(
-      new ProdutoNaoLocalizadoErro('Produto informado não existe'),
-    );
-    expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalledWith(
-      produtoId,
-    );
-  });
-
-  it('deve retornar erro ao editar um produto com nome duplicado', async () => {
-    produtoFactoryMock.criarEntidadeProduto.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-    produtoRepositoryMock.buscarProdutoPorId.mockReturnValue(produtoModelMock);
-    produtoRepositoryMock.buscarProdutoPorNome.mockReturnValue(
-      produtoModelMock,
-    );
-
-    await expect(
-      produtoUseCase.editarProduto(produtoId, atualizaProdutoDTOMock),
-    ).rejects.toThrow(
-      new ProdutoDuplicadoErro('Existe um produto com esse nome'),
-    );
-    expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalledWith(
-      produtoId,
-    );
-    expect(produtoRepositoryMock.buscarProdutoPorNome).toHaveBeenCalledWith(
-      produtoEntityNotIdMock.nome,
-    );
-  });
-
-  it('deve excluir um produto com sucesso', async () => {
-    produtoRepositoryMock.buscarProdutoPorId.mockReturnValue(produtoModelMock);
-    produtoRepositoryMock.excluirProduto.mockReturnValue(null);
-
-    const result = await produtoUseCase.excluirProduto(produtoId);
-
-    expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalledWith(
-      produtoId,
-    );
-    expect(produtoRepositoryMock.excluirProduto).toHaveBeenCalledWith(
-      produtoId,
-    );
-    expect(result).toStrictEqual({
-      mensagem: 'Produto excluído com sucesso',
-    });
-  });
-
-  it('deve retornar erro ao excluir um produto que não existe', async () => {
-    produtoRepositoryMock.buscarProdutoPorId.mockReturnValue(null);
-
-    await expect(produtoUseCase.excluirProduto(produtoId)).rejects.toThrow(
-      new ProdutoNaoLocalizadoErro('Produto informado não existe'),
-    );
-    expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalledWith(
-      produtoId,
-    );
   });
 
   it('deve buscar um produto por id', async () => {

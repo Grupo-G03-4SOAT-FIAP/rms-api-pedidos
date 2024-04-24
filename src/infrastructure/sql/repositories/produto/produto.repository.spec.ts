@@ -7,15 +7,8 @@ import {
   produtoEntityNotIdMock,
   produtoModelMock,
   produtoTypeORMMock,
-  produtoEntityMock,
 } from 'src/mocks/produto.mock';
 import { SQLDTOFactory } from '../../factories/sql.dto.factory';
-
-class SoftDeleteMock {
-  softDelete: jest.Mock = jest.fn();
-}
-
-const produtoSoftDeleteMock = new SoftDeleteMock();
 
 describe('ProdutoRepository', () => {
   let produtoRepository: ProdutoRepository;
@@ -48,113 +41,6 @@ describe('ProdutoRepository', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('deve criar um produto', async () => {
-    produtoTypeORMMock.findOne.mockResolvedValue(null);
-    produtoTypeORMMock.create.mockReturnValue(produtoModelMock);
-    produtoTypeORMMock.save.mockResolvedValue(
-      Promise.resolve(produtoModelMock),
-    );
-    produtoSQLDTOFactoryMock.criarProdutoDTO.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-
-    const result = await produtoRepository.criarProduto(produtoEntityNotIdMock);
-
-    expect(produtoTypeORMMock.create).toHaveBeenCalledWith(
-      produtoEntityNotIdMock,
-    );
-    expect(produtoTypeORMMock.save).toHaveBeenCalledWith(produtoModelMock);
-    expect(produtoSQLDTOFactoryMock.criarProdutoDTO).toHaveBeenCalledWith(
-      produtoModelMock,
-    );
-    expect(result).toStrictEqual(produtoEntityNotIdMock);
-  });
-
-  it('deve restaurar um produto', async () => {
-    produtoTypeORMMock.findOne
-      .mockResolvedValue(Promise.resolve(produtoModelMock))
-      .mockResolvedValue(Promise.resolve(produtoModelMock));
-    produtoTypeORMMock.restore.mockResolvedValue({
-      affected: 1,
-      raw: [{ produtoModelMock }],
-      generatedMaps: [{}],
-    });
-    produtoTypeORMMock.findOne.mockResolvedValue(
-      Promise.resolve(produtoModelMock),
-    );
-    produtoSQLDTOFactoryMock.criarProdutoDTO.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-
-    const result = await produtoRepository.criarProduto(produtoEntityNotIdMock);
-
-    expect(produtoTypeORMMock.findOne).toHaveBeenCalledWith({
-      where: {
-        nome: produtoEntityMock.nome,
-      },
-      withDeleted: true,
-    });
-    expect(produtoTypeORMMock.restore).toHaveBeenCalledWith({
-      id: produtoModelMock.id,
-    });
-    expect(produtoTypeORMMock.findOne).toHaveBeenCalledWith({
-      where: {
-        id: produtoModelMock.id,
-      },
-      relations: ['categoria'],
-    });
-    expect(produtoSQLDTOFactoryMock.criarProdutoDTO).toHaveBeenCalledWith(
-      produtoModelMock,
-    );
-    expect(result).toStrictEqual(produtoEntityNotIdMock);
-  });
-
-  it('deve editar um produto', async () => {
-    produtoTypeORMMock.create.mockReturnValue(produtoModelMock);
-    produtoTypeORMMock.findOne.mockResolvedValue(
-      Promise.resolve(produtoModelMock),
-    );
-    produtoSQLDTOFactoryMock.criarProdutoDTO.mockReturnValue(
-      produtoEntityNotIdMock,
-    );
-
-    const result = await produtoRepository.editarProduto(
-      produtoId,
-      produtoEntityNotIdMock,
-    );
-
-    expect(produtoTypeORMMock.create).toHaveBeenCalledWith(
-      produtoEntityNotIdMock,
-    );
-    expect(produtoTypeORMMock.update).toHaveBeenCalledWith(
-      produtoId,
-      produtoModelMock,
-    );
-    expect(produtoTypeORMMock.findOne).toHaveBeenCalledWith({
-      where: { id: produtoId },
-      relations: relations,
-    });
-    expect(produtoSQLDTOFactoryMock.criarProdutoDTO).toHaveBeenCalledWith(
-      produtoModelMock,
-    );
-    expect(result).toStrictEqual(produtoEntityNotIdMock);
-  });
-
-  it('deve excluir um produto no formato softdelete', async () => {
-    produtoSoftDeleteMock.softDelete.mockResolvedValue({ affected: 1 });
-
-    const clienteService = new ProdutoRepository(
-      produtoSQLDTOFactoryMock as any,
-      produtoSoftDeleteMock as any,
-    ); // Usar "any" para evitar problemas de tipo
-
-    await clienteService.excluirProduto(produtoId);
-
-    expect(produtoSoftDeleteMock.softDelete).toHaveBeenCalledWith({
-      id: produtoId,
-    });
   });
 
   it('deve buscar um produto por id', async () => {

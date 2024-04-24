@@ -1,21 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { HTTPResponse } from 'src/application/common/HTTPResponse';
 import { CategoriaNaoLocalizadaErro } from 'src/domain/categoria/exceptions/categoria.exception';
 import { ICategoriaRepository } from 'src/domain/categoria/interfaces/categoria.repository.port';
 import { ProdutoEntity } from 'src/domain/produto/entities/produto.entity';
-import {
-  ProdutoDuplicadoErro,
-  ProdutoNaoLocalizadoErro,
-} from 'src/domain/produto/exceptions/produto.exception';
+import { ProdutoNaoLocalizadoErro } from 'src/domain/produto/exceptions/produto.exception';
 import { IProdutoDTOFactory } from 'src/domain/produto/interfaces/produto.dto.factory.port';
 import { IProdutoFactory } from 'src/domain/produto/interfaces/produto.factory.port';
 import { IProdutoRepository } from 'src/domain/produto/interfaces/produto.repository.port';
 import { IProdutoUseCase } from 'src/domain/produto/interfaces/produto.use_case.port';
-import {
-  AtualizaProdutoDTO,
-  CriaProdutoDTO,
-  ProdutoDTO,
-} from 'src/presentation/rest/v1/presenters/produto/produto.dto';
+import { ProdutoDTO } from 'src/presentation/rest/v1/presenters/produto/produto.dto';
 
 @Injectable()
 export class ProdutoUseCase implements IProdutoUseCase {
@@ -58,61 +50,6 @@ export class ProdutoUseCase implements IProdutoUseCase {
     const produtoDTO =
       this.produtoDTOFactory.criarProdutoDTO(produtoEncontrado);
     return produtoDTO;
-  }
-
-  async criarProduto(
-    criaProdutoDTO: CriaProdutoDTO,
-  ): Promise<HTTPResponse<ProdutoDTO>> {
-    await this.validarProdutoPorNome(criaProdutoDTO.nome);
-    const produto =
-      await this.produtoFactory.criarEntidadeProduto(criaProdutoDTO);
-    const produtoCriado = await this.produtoRepository.criarProduto(produto);
-    const produtoDTO = this.produtoDTOFactory.criarProdutoDTO(produtoCriado);
-    return {
-      mensagem: 'Produto criado com sucesso',
-      body: produtoDTO,
-    };
-  }
-
-  async editarProduto(
-    idProduto: string,
-    atualizaProdutoDTO: AtualizaProdutoDTO,
-  ): Promise<HTTPResponse<ProdutoDTO>> {
-    await this.validarProdutoPorId(idProduto);
-    if (atualizaProdutoDTO.nome)
-      await this.validarProdutoPorNome(atualizaProdutoDTO.nome);
-    const produto =
-      await this.produtoFactory.criarEntidadeProduto(atualizaProdutoDTO);
-    const produtoEditado = await this.produtoRepository.editarProduto(
-      idProduto,
-      produto,
-    );
-    const produtoDTO = this.produtoDTOFactory.criarProdutoDTO(produtoEditado);
-    return {
-      mensagem: 'Produto atualizado com sucesso',
-      body: produtoDTO,
-    };
-  }
-
-  async excluirProduto(
-    idProduto: string,
-  ): Promise<Omit<HTTPResponse<void>, 'body'>> {
-    await this.validarProdutoPorId(idProduto);
-    await this.produtoRepository.excluirProduto(idProduto);
-    return {
-      mensagem: 'Produto excluído com sucesso',
-    };
-  }
-
-  private async validarProdutoPorNome(
-    nomeProduto: string,
-  ): Promise<ProdutoEntity | null> {
-    const produtoEncontrado =
-      await this.produtoRepository.buscarProdutoPorNome(nomeProduto);
-    if (produtoEncontrado) {
-      throw new ProdutoDuplicadoErro('Existe um produto com esse nome');
-    }
-    return produtoEncontrado;
   }
 
   private async validarProdutoPorId(

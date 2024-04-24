@@ -14,43 +14,6 @@ export class CategoriaRepository implements ICategoriaRepository {
     private readonly categoriaRepository: Repository<CategoriaModel>,
   ) {}
 
-  async criarCategoria(categoria: CategoriaEntity): Promise<CategoriaEntity> {
-    const categoriaExistente = await this.categoriaRepository.findOne({
-      where: { nome: categoria.nome },
-      withDeleted: true,
-    });
-
-    if (categoriaExistente) {
-      await this.categoriaRepository.restore({
-        id: categoriaExistente.id,
-      });
-      return this.sqlDTOFactory.criarCategoriaDTO(categoriaExistente);
-    } else {
-      const categoriaModel = this.categoriaRepository.create(categoria);
-      await this.categoriaRepository.save(categoriaModel);
-      return this.sqlDTOFactory.criarCategoriaDTO(categoriaModel);
-    }
-  }
-
-  async editarCategoria(
-    categoriaId: string,
-    categoria: CategoriaEntity,
-  ): Promise<CategoriaEntity | null> {
-    const categoriaModel = this.categoriaRepository.create(categoria);
-    await this.categoriaRepository.update(categoriaId, categoriaModel);
-    const categoriaModelAtualizado = await this.categoriaRepository.findOne({
-      where: { id: categoriaId },
-    });
-    if (categoriaModelAtualizado) {
-      return this.sqlDTOFactory.criarCategoriaDTO(categoriaModelAtualizado);
-    }
-    return null;
-  }
-
-  async excluirCategoria(categoriaId: string): Promise<void> {
-    await this.categoriaRepository.softDelete({ id: categoriaId });
-  }
-
   async buscarCategoriaPorId(
     categoriaId: string,
   ): Promise<CategoriaEntity | null> {

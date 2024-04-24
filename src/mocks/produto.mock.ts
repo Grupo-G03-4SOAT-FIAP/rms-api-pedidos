@@ -1,5 +1,4 @@
 import { Repository } from 'typeorm';
-import { faker } from '@faker-js/faker';
 import {
   categoriaDTOMock,
   categoriaEntityMock,
@@ -7,11 +6,7 @@ import {
 } from './categoria.mock';
 import { ProdutoModel } from 'src/infrastructure/sql/models/produto.model';
 import { ProdutoEntity } from 'src/domain/produto/entities/produto.entity';
-import {
-  AtualizaProdutoDTO,
-  CriaProdutoDTO,
-  ProdutoDTO,
-} from 'src/presentation/rest/v1/presenters/produto/produto.dto';
+import { ProdutoDTO } from 'src/presentation/rest/v1/presenters/produto/produto.dto';
 
 // Mock para simular dados da tabela produto no banco de dados
 export const produtoModelMock = new ProdutoModel();
@@ -51,22 +46,6 @@ export const produtoEntityNotDescricaoMock = new ProdutoEntity(
   5.0,
   'http://',
 );
-
-// Mock para simular o DTO com os dados recebidos pelo usuario ao criar um produto
-export const criaProdutoDTOMock = new CriaProdutoDTO();
-criaProdutoDTOMock.nome = 'Produto X';
-criaProdutoDTOMock.descricao = 'Teste Produto X';
-criaProdutoDTOMock.valorUnitario = 5.0;
-criaProdutoDTOMock.imagemUrl = 'http://';
-criaProdutoDTOMock.categoriaId = '0a14aa4e-75e7-405f-8301-81f60646c93d';
-
-// Mock para simular o DTO com os dados recebidos pelo usuario ao atualizar um produto
-export const atualizaProdutoDTOMock = new AtualizaProdutoDTO();
-atualizaProdutoDTOMock.nome = 'Produto X';
-atualizaProdutoDTOMock.descricao = 'Teste Produto X';
-atualizaProdutoDTOMock.valorUnitario = 5.0;
-atualizaProdutoDTOMock.imagemUrl = 'http://';
-atualizaProdutoDTOMock.categoriaId = '0a14aa4e-75e7-405f-8301-81f60646c93d';
 
 // Mock para simular o DTO com dados de produto enviados para o usuario ao responder uma requisição
 export const produtoDTOMock = new ProdutoDTO();
@@ -126,15 +105,4 @@ export const produtoUseCaseMock = {
   buscarProduto: jest.fn(),
   listarProdutos: jest.fn(),
   listarProdutosPorCategoria: jest.fn(),
-};
-
-export const criarFakeProdutoDTO = (categoriaId: string): CriaProdutoDTO => {
-  const criaProdutoDTO = new CriaProdutoDTO();
-  criaProdutoDTO.nome = `${faker.commerce.product()} - ${faker.string.uuid()}`;
-  criaProdutoDTO.descricao = faker.commerce.productDescription();
-  criaProdutoDTO.valorUnitario = parseFloat(faker.commerce.price());
-  criaProdutoDTO.imagemUrl = faker.image.url();
-  criaProdutoDTO.categoriaId = '0a14aa4e-75e7-405f-8301-81f60646c93d';
-  criaProdutoDTO.categoriaId = categoriaId;
-  return criaProdutoDTO;
 };

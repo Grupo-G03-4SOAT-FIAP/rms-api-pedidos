@@ -40,26 +40,6 @@ GET http://localhost:3000/categoria
 ### Detalhes de uma categoria
 GET http://localhost:3000/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
 
-### Criar categoria
-POST http://localhost:3000/categoria
-Content-Type: application/json
-
-{
-    "nome": "Bebidas",
-    "descricao": "Refrigerantes, sucos e bebidas alcoolicas"
-}
-
-### Editar categoria
-PUT http://localhost:3000/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
-Content-Type: application/json
-
-{
-    "descricao": "Refrigerantes, sucos"
-}
-
-### Remover categoria
-DELETE http://localhost:3000/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
-
 ##################################################
 
 ### Listar produtos
@@ -70,33 +50,6 @@ GET http://localhost:3000/produto/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
 
 ### Detalhes de um produto
 GET http://localhost:3000/produto/6a1f1007-b48a-458b-8009-9f2701eae8f3
-
-### Criar produto
-POST http://localhost:3000/produto
-Content-Type: application/json
-
-{
-    "nome": "X-Tudo",
-    "valorUnitario": 29.9,
-    "descricao": "Ingredientes: 1 hambúrguer, 50 g de bacon picados, 1 ovo, 2 fatias de presunto, 2 fatias de mussarela (cheddar), 1 folha de alface, 1 rodela de tomate, 1 pão de hambúrguer, 1 colher de maionese, Catchup a gosto (opcional)",
-    "imagemUrl": "https://conteudo.imguol.com.br/c/entretenimento/17/2023/05/24/x-tudo-brasileiro-tem-variedade-de-ingredientes-de-acordo-com-preferencias-regionais-aqui-versao-com-carne-bovina-tomato-salsicha-presunto-bacon-e-queijo-no-pao-1684938396547_v2_1x1.jpg",
-    "categoriaId": "9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4"
-}
-
-### Editar produto
-PUT http://localhost:3000/produto/6a1f1007-b48a-458b-8009-9f2701eae8f3
-Content-Type: application/json
-
-{
-    "nome": "X-Salada",
-    "valorUnitario": 16,
-    "descricao": "Ingredientes: 1 hambúrguer, 50 g de bacon picados, 1 ovo, 2 fatias de presunto, 2 fatias de mussarela (cheddar), 1 folha de alface, 1 rodela de tomate, 1 pão de hambúrguer, 1 colher de maionese, Catchup a gosto (opcional)",
-    "imagemUrl": "https://anamariabraga.globo.com/wp-content/uploads/2016/11/x-salada-classico.jpg",
-    "categoriaId": "9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4"
-}
-
-### Remover produto
-DELETE http://localhost:3000/produto/6a1f1007-b48a-458b-8009-9f2701eae8f3
 
 ##################################################
 
