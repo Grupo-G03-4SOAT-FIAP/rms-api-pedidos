@@ -124,6 +124,48 @@ describe('PedidoUseCase', () => {
     });
   });
 
+  it('deve editar o status de um pedido e pagamento com sucesso', async () => {
+    atualizaPedidoDTOMock.pago = true;
+
+    const pedidoModelPagoMock = pedidoModelMock;
+    pedidoModelPagoMock.statusPedido = 'em_preparacao';
+    pedidoModelPagoMock.pago = true;
+
+    pedidoDTOMock.statusPedido = 'em_preparacao';
+    pedidoDTOMock.pago = true;
+
+    pedidoRepositoryMock.buscarPedido.mockReturnValue(pedidoModelMock);
+    pedidoRepositoryMock.editarStatusPagamento.mockReturnValue(
+      pedidoModelPagoMock,
+    );
+    pedidoRepositoryMock.editarStatusPedido.mockReturnValue(
+      pedidoModelPagoMock,
+    );
+    pedidoDTOFactoryMock.criarPedidoDTO.mockReturnValue(pedidoDTOMock);
+
+    const result = await pedidoUseCase.editarPedido(
+      pedidoId,
+      atualizaPedidoDTOMock,
+    );
+
+    expect(pedidoRepositoryMock.buscarPedido).toHaveBeenCalledWith(pedidoId);
+    expect(pedidoRepositoryMock.editarStatusPagamento).toHaveBeenCalledWith(
+      pedidoId,
+      atualizaPedidoDTOMock.pago,
+    );
+    expect(pedidoRepositoryMock.editarStatusPedido).toHaveBeenCalledWith(
+      pedidoId,
+      atualizaPedidoDTOMock.statusPedido,
+    );
+    expect(pedidoDTOFactoryMock.criarPedidoDTO).toHaveBeenCalledWith(
+      pedidoModelPagoMock,
+    );
+    expect(result).toStrictEqual({
+      mensagem: 'Pedido atualizado com sucesso',
+      body: pedidoDTOMock,
+    });
+  });
+
   it('deve atualizar o status de pagamento do pedido com sucesso', async () => {
     const idPedidoMercadoPago = '15171882961';
     const topicMercadoPago = 'merchant_order';

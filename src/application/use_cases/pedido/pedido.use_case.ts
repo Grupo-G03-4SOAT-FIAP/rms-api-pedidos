@@ -123,10 +123,19 @@ export class PedidoUseCase implements IPedidoUseCase {
     atualizaPedidoDTO: AtualizaPedidoDTO,
   ): Promise<HTTPResponse<PedidoDTO>> {
     await this.validarPedidoPorId(idPedido);
+
+    if (atualizaPedidoDTO.pago !== undefined) {
+      await this.pedidoRepository.editarStatusPagamento(
+        idPedido,
+        atualizaPedidoDTO.pago,
+      );
+    }
+
     const pedidoEditado = await this.pedidoRepository.editarStatusPedido(
       idPedido,
       atualizaPedidoDTO.statusPedido,
     );
+
     const pedidoDTO = this.pedidoDTOFactory.criarPedidoDTO(pedidoEditado);
     return {
       mensagem: 'Pedido atualizado com sucesso',

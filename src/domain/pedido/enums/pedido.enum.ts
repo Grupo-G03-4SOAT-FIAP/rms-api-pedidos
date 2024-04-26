@@ -5,8 +5,9 @@ export enum StatusPagamento {
 }
 
 export enum StatusPedido {
+  AGUARDANDO_PAGAMENTO = 'aguardando_pagamento',
   RECEBIDO = 'recebido',
-  EM_PREPARACAO = 'em preparacao',
+  EM_PREPARACAO = 'em_preparacao',
   PRONTO = 'pronto',
   FINALIZADO = 'finalizado',
   CANCELADO = 'cancelado',

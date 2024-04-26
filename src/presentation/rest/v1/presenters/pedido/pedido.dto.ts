@@ -8,6 +8,7 @@ import {
   ArrayMinSize,
   IsDefined,
   ValidateNested,
+  IsBoolean,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { CriaItemPedidoDTO, ItemPedidoDTO } from './item_pedido.dto';
@@ -46,6 +47,12 @@ export class AtualizaPedidoDTO {
   @IsDefined({ each: true, message: 'O status do pedido não pode ser nulo' })
   @ApiProperty({ description: 'Status do pedido' })
   statusPedido: StatusPedido;
+
+  @IsOptional()
+  @IsBoolean()
+  @IsDefined({ each: true, message: 'O status do pagamento não pode ser nulo' })
+  @ApiProperty({ description: 'Status do pagamento', required: false })
+  pago?: boolean;
 }
 
 export class PedidoDTO {
