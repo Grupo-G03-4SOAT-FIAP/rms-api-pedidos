@@ -18,11 +18,6 @@ import {
   CriaPedidoDTO,
   PedidoDTO,
 } from 'src/presentation/rest/v1/presenters/pedido/pedido.dto';
-import {
-  MensagemMercadoPagoDTO,
-  PaymentDTO,
-  PedidoGatewayPagamentoDTO,
-} from 'src/presentation/rest/v1/presenters/pedido/gatewaypag.dto';
 
 // Mock para simular dados da tabela pedido no banco de dados
 export const pedidoModelMock = new PedidoModel();
@@ -98,20 +93,27 @@ pedidoDTOMock.atualizadoEm = '2024-01-25T00:05:04.941Z';
 pedidoDTOMock.cliente = clienteDTOMock;
 pedidoDTOMock.qrCode = null;
 
-export const mensagemGatewayPagamentoDTO = new MensagemMercadoPagoDTO();
-mensagemGatewayPagamentoDTO.resource =
-  'https://api.mercadolibre.com/merchant_orders/15171882961';
-mensagemGatewayPagamentoDTO.topic = 'merchant_order';
-
-export const pedidoGatewayPagamentoDTO = new PedidoGatewayPagamentoDTO();
-pedidoGatewayPagamentoDTO.id = 15171882961;
-pedidoGatewayPagamentoDTO.status = 'closed';
-pedidoGatewayPagamentoDTO.external_reference =
-  '0a14aa4e-75e7-405f-8301-81f60646c93d';
-const itemDTO = new PaymentDTO();
-itemDTO.status = 'approved';
-pedidoGatewayPagamentoDTO.payments = [itemDTO];
-pedidoGatewayPagamentoDTO.order_status = 'paid';
+export const pagamentoResponseMock = {
+  qrCode: '00020101021243650016COM',
+  id: '0a14aa4e-75e7-405f-8301-81f60646c93d',
+  numeroPedido: '05012024',
+  itensPedido: {
+    quantidade: 1,
+    produto: {
+      id: '0a14aa4e-75e7-405f-8301-81f60646c93d',
+      nome: 'Produto X',
+      descricao: 'Teste Produto X',
+      valorUnitario: 29.9,
+      categoria: {
+        id: '0a14aa4e-75e7-405f-8301-81f60646c93d',
+        nome: 'Lanche',
+        descricao: 'Lanche X Tudo',
+      },
+    },
+  },
+  pago: false,
+  statusPedido: 'recebido',
+};
 
 // Mock jest das funções do typeORM interagindo com a tabela pedido
 export const pedidoTypeORMMock: jest.Mocked<Repository<PedidoModel>> = {
@@ -123,14 +125,6 @@ export const pedidoTypeORMMock: jest.Mocked<Repository<PedidoModel>> = {
 } as Partial<jest.Mocked<Repository<PedidoModel>>> as jest.Mocked<
   Repository<PedidoModel>
 >;
-
-export const configServiceMock = {
-  get: jest.fn((key: string) => {
-    if (key === 'ENABLE_MERCADOPAGO') {
-      return 'false';
-    }
-  }),
-};
 
 // Mock jest das funções do repository pedido
 export const pedidoRepositoryMock = {
@@ -145,12 +139,6 @@ export const pedidoRepositoryMock = {
 // Mock jest da função do factory sql dto de pedido
 export const pedidoSQLDTOFactoryMock = {
   criarPedidoDTO: jest.fn(),
-};
-
-// Mock jest das funções do service gateway pagamento
-export const gatewayPagamentoServiceMock = {
-  criarPedido: jest.fn(),
-  consultarPedido: jest.fn(),
 };
 
 // Mock jest das funções da factory que cria entidade pedido
@@ -179,4 +167,14 @@ export const pedidoUseCaseMock = {
   buscarPedido: jest.fn(),
   listarPedidos: jest.fn(),
   listarPedidosRecebido: jest.fn(),
+};
+
+// Mock jest das funções do adapter pagamento
+export const pagamentoAdapterMock = {
+  gerarPagamento: jest.fn(),
+};
+
+// Mock jest das funções do service pagamento
+export const pagamentoServiceMock = {
+  gerarPagamento: jest.fn(),
 };

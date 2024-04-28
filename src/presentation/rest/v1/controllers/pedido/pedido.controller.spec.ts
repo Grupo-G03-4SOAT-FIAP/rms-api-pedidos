@@ -6,13 +6,11 @@ import { ClienteNaoLocalizadoErro } from 'src/domain/cliente/exceptions/cliente.
 import { PedidoNaoLocalizadoErro } from 'src/domain/pedido/exceptions/pedido.exception';
 import {
   atualizaPedidoDTOMock,
-  configServiceMock,
   criaPedidoDTOMock,
   pedidoDTOMock,
   pedidoUseCaseMock,
 } from 'src/mocks/pedido.mock';
 import { CognitoTestingModule } from '@nestjs-cognito/testing';
-import { ConfigService } from '@nestjs/config';
 import { clienteDTOMock, clienteDTONotIdMock } from 'src/mocks/cliente.mock';
 
 describe('PedidoController', () => {
@@ -33,10 +31,6 @@ describe('PedidoController', () => {
         {
           provide: IPedidoUseCase,
           useValue: pedidoUseCaseMock,
-        },
-        {
-          provide: ConfigService,
-          useValue: configServiceMock,
         },
       ],
     }).compile();

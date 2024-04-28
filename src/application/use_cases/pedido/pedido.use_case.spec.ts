@@ -1,22 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConfigService } from '@nestjs/config';
 import { PedidoUseCase } from './pedido.use_case';
 import { IPedidoRepository } from 'src/domain/pedido/interfaces/pedido.repository.port';
 import { IPedidoFactory } from 'src/domain/pedido/interfaces/pedido.factory.port';
-import { IGatewayPagamentoService } from 'src/domain/pedido/interfaces/gatewaypag.service.port';
 import { IPedidoDTOFactory } from 'src/domain/pedido/interfaces/pedido.dto.factory.port';
 import { PedidoNaoLocalizadoErro } from 'src/domain/pedido/exceptions/pedido.exception';
 import {
   atualizaPedidoDTOMock,
-  configServiceMock,
   criaPedidoDTOMock,
-  gatewayPagamentoServiceMock,
-  mensagemGatewayPagamentoDTO,
+  pagamentoResponseMock,
+  pagamentoServiceMock,
   pedidoDTOFactoryMock,
   pedidoDTOMock,
   pedidoEntityMock,
   pedidoFactoryMock,
-  pedidoGatewayPagamentoDTO,
   pedidoModelMock,
   pedidoRepositoryMock,
 } from 'src/mocks/pedido.mock';
@@ -26,6 +22,7 @@ import {
   clienteRepositoryMock,
 } from 'src/mocks/cliente.mock';
 import { IClienteRepository } from 'src/domain/cliente/interfaces/cliente.repository.port';
+import { IPagamentoService } from 'src/domain/pedido/interfaces/pagamento.service.port';
 
 describe('PedidoUseCase', () => {
   let pedidoUseCase: PedidoUseCase;
@@ -48,16 +45,12 @@ describe('PedidoUseCase', () => {
           useValue: pedidoFactoryMock,
         },
         {
-          provide: IGatewayPagamentoService,
-          useValue: gatewayPagamentoServiceMock,
+          provide: IPagamentoService,
+          useValue: pagamentoServiceMock,
         },
         {
           provide: IPedidoDTOFactory,
           useValue: pedidoDTOFactoryMock,
-        },
-        {
-          provide: ConfigService,
-          useValue: configServiceMock,
         },
       ],
     }).compile();
@@ -73,7 +66,7 @@ describe('PedidoUseCase', () => {
   it('deve criar um pedido com sucesso', async () => {
     pedidoFactoryMock.criarEntidadePedido.mockReturnValue(pedidoEntityMock);
     pedidoRepositoryMock.criarPedido.mockReturnValue(pedidoModelMock);
-    gatewayPagamentoServiceMock.criarPedido.mockReturnValue(null);
+    pagamentoServiceMock.gerarPagamento.mockReturnValue(pagamentoResponseMock);
     pedidoDTOFactoryMock.criarPedidoDTO.mockReturnValue(pedidoDTOMock);
     pedidoFactoryMock.criarEntidadeCliente.mockReturnValue(pedidoEntityMock);
     clienteRepositoryMock.buscarClientePorCPF.mockReturnValue(clienteModelMock);
@@ -163,36 +156,6 @@ describe('PedidoUseCase', () => {
     expect(result).toStrictEqual({
       mensagem: 'Pedido atualizado com sucesso',
       body: pedidoDTOMock,
-    });
-  });
-
-  it('deve atualizar o status de pagamento do pedido com sucesso', async () => {
-    const idPedidoMercadoPago = '15171882961';
-    const topicMercadoPago = 'merchant_order';
-
-    pedidoRepositoryMock.buscarPedido.mockReturnValue(pedidoModelMock);
-    pedidoRepositoryMock.editarStatusPedido.mockReturnValue(pedidoModelMock);
-    pedidoDTOFactoryMock.criarPedidoDTO.mockReturnValue(pedidoDTOMock);
-    gatewayPagamentoServiceMock.consultarPedido.mockReturnValue(
-      pedidoGatewayPagamentoDTO,
-    );
-
-    const result = await pedidoUseCase.webhookPagamento(
-      idPedidoMercadoPago,
-      topicMercadoPago,
-      mensagemGatewayPagamentoDTO,
-    );
-
-    expect(pedidoRepositoryMock.editarStatusPagamento).toHaveBeenCalledWith(
-      pedidoId,
-      true,
-    );
-    expect(pedidoRepositoryMock.editarStatusPedido).toHaveBeenCalledWith(
-      pedidoId,
-      'em preparacao',
-    );
-    expect(result).toStrictEqual({
-      mensagem: 'Mensagem consumida com sucesso',
     });
   });
 
