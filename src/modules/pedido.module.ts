@@ -10,8 +10,6 @@ import { IPedidoUseCase } from '../domain/pedido/interfaces/pedido.use_case.port
 import { PedidoModel } from '../infrastructure/sql/models/pedido.model';
 import { PedidoRepository } from '../infrastructure/sql/repositories/pedido/pedido.repository';
 import { PedidoController } from '../presentation/rest/v1/controllers/pedido/pedido.controller';
-import { IGatewayPagamentoService } from '../domain/pedido/interfaces/gatewaypag.service.port';
-import { GatewayMercadoPagoService } from '../infrastructure/services/gateway_pagamentos/gatewaypag.service';
 import { SQLDTOFactory } from '../infrastructure/sql/factories/sql.dto.factory';
 import { ItemPedidoModel } from '../infrastructure/sql/models/item_pedido.model';
 import { ProdutoModule } from './produto.module';
@@ -19,6 +17,8 @@ import { ClienteModule } from './client.module';
 import { PedidoService } from '../domain/pedido/services/pedido.service';
 import { AuthenticationGuard } from '@nestjs-cognito/auth';
 import { ClientePedidoModel } from 'src/infrastructure/sql/models/cliente_pedido.model';
+import { PagamentoService } from 'src/domain/pedido/services/pagamento.service';
+import { IPagamentoService } from 'src/domain/pedido/interfaces/pagamento.service.port';
 
 @Module({
   imports: [
@@ -52,10 +52,10 @@ import { ClientePedidoModel } from 'src/infrastructure/sql/models/cliente_pedido
       provide: IPedidoFactory,
       useClass: PedidoFactory,
     },
-    GatewayMercadoPagoService,
+    PagamentoService,
     {
-      provide: IGatewayPagamentoService,
-      useClass: GatewayMercadoPagoService,
+      provide: IPagamentoService,
+      useClass: PagamentoService,
     },
     SQLDTOFactory,
     PedidoService,

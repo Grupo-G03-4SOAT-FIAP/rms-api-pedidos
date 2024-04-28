@@ -4,12 +4,12 @@ import {
   Get,
   HttpCode,
   Inject,
+  InternalServerErrorException,
   NotFoundException,
   Param,
   ParseUUIDPipe,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IPedidoUseCase } from 'src/domain/pedido/interfaces/pedido.use_case.port';
@@ -20,9 +20,7 @@ import {
 } from '../../presenters/pedido/pedido.dto';
 import { BadRequestError } from '../../helpers/swagger/status-codes/bad_requests.swagger';
 import { NotFoundError } from '../../helpers/swagger/status-codes/not_found.swagger';
-import { MensagemMercadoPagoDTO } from '../../presenters/pedido/gatewaypag.dto';
 import { Authentication, CognitoUser } from '@nestjs-cognito/auth';
-import { ConfigService } from '@nestjs/config';
 import { CriaClienteDTO } from '../../presenters/cliente/cliente.dto';
 
 @Controller('pedido')
@@ -31,7 +29,6 @@ export class PedidoController {
   constructor(
     @Inject(IPedidoUseCase)
     private readonly pedidoUseCase: IPedidoUseCase,
-    private configService: ConfigService,
   ) {}
 
   @Post()
@@ -72,6 +69,9 @@ export class PedidoController {
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException(error.message);
+      }
+      if (error instanceof InternalServerErrorException) {
+        throw new InternalServerErrorException(error.message);
       }
       throw error;
     }
@@ -153,37 +153,5 @@ export class PedidoController {
   })
   async listar() {
     return await this.pedidoUseCase.listarPedidos();
-  }
-
-  @Post('/webhook')
-  @HttpCode(201)
-  @ApiOperation({ summary: 'Consumir uma mensagem' })
-  @ApiResponse({
-    status: 201,
-    description: 'Mensagem consumida com sucesso',
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Dados inválidos',
-    type: BadRequestError,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Pedido informado não existe',
-    type: NotFoundError,
-  })
-  async consumirMensagem(
-    @Query('id') id: string,
-    @Query('topic') topic: string,
-    @Body() mensagem: MensagemMercadoPagoDTO,
-  ) {
-    try {
-      return await this.pedidoUseCase.webhookPagamento(id, topic, mensagem);
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw new NotFoundException(error.message);
-      }
-      throw error;
-    }
   }
 }
