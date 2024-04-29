@@ -73,10 +73,10 @@ export class PedidoUseCase implements IPedidoUseCase {
       await this.criarOuAtualizarCliente(cliente);
     pedido.cliente = clienteCriadoOuAtualizado;
     pedido.clientePedido = this.copiarDadosCliente(clienteCriadoOuAtualizado);
+
+    const pagamentoQRCode = await this.pagamentoService.gerarPagamento(pedido);
     const pedidoCriado = await this.pedidoRepository.criarPedido(pedido);
     const pedidoDTO = this.pedidoDTOFactory.criarPedidoDTO(pedidoCriado);
-    const pagamentoQRCode =
-      await this.pagamentoService.gerarPagamento(pedidoCriado);
     pedidoDTO.qrCode = pagamentoQRCode.qrCode;
     return {
       mensagem: 'Pedido criado com sucesso',
@@ -126,10 +126,10 @@ export class PedidoUseCase implements IPedidoUseCase {
   ): Promise<HTTPResponse<PedidoDTO>> {
     await this.validarPedidoPorId(idPedido);
 
-    if (atualizaPedidoDTO.pago !== undefined) {
+    if (atualizaPedidoDTO.statusPagamento !== undefined) {
       await this.pedidoRepository.editarStatusPagamento(
         idPedido,
-        atualizaPedidoDTO.pago,
+        atualizaPedidoDTO.statusPagamento,
       );
     }
 

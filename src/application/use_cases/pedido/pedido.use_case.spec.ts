@@ -23,6 +23,7 @@ import {
 } from 'src/mocks/cliente.mock';
 import { IClienteRepository } from 'src/domain/cliente/interfaces/cliente.repository.port';
 import { IPagamentoService } from 'src/domain/pedido/interfaces/pagamento.service.port';
+import { StatusPagamento } from 'src/domain/pedido/enums/pedido.enum';
 
 describe('PedidoUseCase', () => {
   let pedidoUseCase: PedidoUseCase;
@@ -118,14 +119,14 @@ describe('PedidoUseCase', () => {
   });
 
   it('deve editar o status de um pedido e pagamento com sucesso', async () => {
-    atualizaPedidoDTOMock.pago = true;
+    atualizaPedidoDTOMock.statusPagamento = StatusPagamento.PAGO;
 
     const pedidoModelPagoMock = pedidoModelMock;
     pedidoModelPagoMock.statusPedido = 'em_preparacao';
-    pedidoModelPagoMock.pago = true;
+    pedidoModelPagoMock.statusPagamento = 'pago';
 
     pedidoDTOMock.statusPedido = 'em_preparacao';
-    pedidoDTOMock.pago = true;
+    pedidoDTOMock.statusPagamento = 'pago';
 
     pedidoRepositoryMock.buscarPedido.mockReturnValue(pedidoModelMock);
     pedidoRepositoryMock.editarStatusPagamento.mockReturnValue(
@@ -144,7 +145,7 @@ describe('PedidoUseCase', () => {
     expect(pedidoRepositoryMock.buscarPedido).toHaveBeenCalledWith(pedidoId);
     expect(pedidoRepositoryMock.editarStatusPagamento).toHaveBeenCalledWith(
       pedidoId,
-      atualizaPedidoDTOMock.pago,
+      atualizaPedidoDTOMock.statusPagamento,
     );
     expect(pedidoRepositoryMock.editarStatusPedido).toHaveBeenCalledWith(
       pedidoId,

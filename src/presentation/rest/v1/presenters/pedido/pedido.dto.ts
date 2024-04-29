@@ -8,12 +8,14 @@ import {
   ArrayMinSize,
   IsDefined,
   ValidateNested,
-  IsBoolean,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { CriaItemPedidoDTO, ItemPedidoDTO } from './item_pedido.dto';
 import { ClienteDTO } from '../cliente/cliente.dto';
-import { StatusPedido } from 'src/domain/pedido/enums/pedido.enum';
+import {
+  StatusPagamento,
+  StatusPedido,
+} from 'src/domain/pedido/enums/pedido.enum';
 
 export class CriaPedidoDTO {
   @IsArray({ message: 'ItensPedido deve ser uma lista' })
@@ -49,10 +51,10 @@ export class AtualizaPedidoDTO {
   statusPedido: StatusPedido;
 
   @IsOptional()
-  @IsBoolean()
+  @IsEnum(StatusPagamento)
   @IsDefined({ each: true, message: 'O status do pagamento não pode ser nulo' })
   @ApiProperty({ description: 'Status do pagamento', required: false })
-  pago?: boolean;
+  statusPagamento?: StatusPagamento;
 }
 
 export class PedidoDTO {
@@ -79,7 +81,7 @@ export class PedidoDTO {
   atualizadoEm: string;
 
   @ApiProperty({ description: 'Status do pagamento' })
-  pago: boolean;
+  statusPagamento: string;
 
   @ApiProperty({ description: 'Cliente associado ao pedido', type: ClienteDTO })
   cliente: ClienteDTO;

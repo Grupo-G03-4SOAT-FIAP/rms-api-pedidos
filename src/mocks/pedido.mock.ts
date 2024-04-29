@@ -12,7 +12,10 @@ import {
 } from './item_pedido.mock';
 import { PedidoModel } from 'src/infrastructure/sql/models/pedido.model';
 import { PedidoEntity } from 'src/domain/pedido/entities/pedido.entity';
-import { StatusPedido } from 'src/domain/pedido/enums/pedido.enum';
+import {
+  StatusPagamento,
+  StatusPedido,
+} from 'src/domain/pedido/enums/pedido.enum';
 import {
   AtualizaPedidoDTO,
   CriaPedidoDTO,
@@ -25,20 +28,20 @@ pedidoModelMock.id = '0a14aa4e-75e7-405f-8301-81f60646c93d';
 pedidoModelMock.numeroPedido = '05012024';
 pedidoModelMock.itensPedido = [itemPedidoModelMock];
 pedidoModelMock.cliente = clienteModelMock;
-pedidoModelMock.pago = false;
-pedidoModelMock.statusPedido = 'recebido';
+pedidoModelMock.statusPagamento = 'pendente';
+pedidoModelMock.statusPedido = 'aguardando_pagamento';
 pedidoModelMock.criadoEm = '2024-01-25T00:05:04.941Z';
 pedidoModelMock.atualizadoEm = '2024-01-25T00:05:04.941Z';
 
 // Mock para simular dados da entidade pedido com todos os itens
 export const pedidoEntityMock = new PedidoEntity(
   [itemPedidoEntityMock],
-  StatusPedido.RECEBIDO,
+  StatusPedido.AGUARDANDO_PAGAMENTO,
   '05012024',
-  false,
-  clienteEntityMock,
-  clienteEntityMock,
+  StatusPagamento.PENDENTE,
   '0a14aa4e-75e7-405f-8301-81f60646c93d',
+  clienteEntityMock,
+  clienteEntityMock,
   '2024-01-25T00:05:04.941Z',
   '2024-01-25T00:05:04.941Z',
 );
@@ -46,28 +49,28 @@ export const pedidoEntityMock = new PedidoEntity(
 // Mock para simular dados da entidade pedido sem data criação e atualização
 export const pedidoEntityNotDateMock = new PedidoEntity(
   [itemPedidoEntityMock],
-  StatusPedido.RECEBIDO,
+  StatusPedido.AGUARDANDO_PAGAMENTO,
   '05012024',
-  false,
-  clienteEntityMock,
-  clienteEntityMock,
+  StatusPagamento.PENDENTE,
   '0a14aa4e-75e7-405f-8301-81f60646c93d',
+  clienteEntityMock,
+  clienteEntityMock,
 );
 
 // Mock para simular dados da entidade pedido sem id
 export const pedidoEntityNotIdMock = new PedidoEntity(
   [itemPedidoEntityNotIdMock],
-  StatusPedido.RECEBIDO,
+  StatusPedido.AGUARDANDO_PAGAMENTO,
   '05012024',
-  false,
+  StatusPagamento.PENDENTE,
 );
 
 // Mock para simular dados da entidade pedido sem cliente
 export const pedidoEntityNotClienteMock = new PedidoEntity(
   [itemPedidoEntityMock],
-  StatusPedido.RECEBIDO,
+  StatusPedido.AGUARDANDO_PAGAMENTO,
   '05012024',
-  false,
+  StatusPagamento.PENDENTE,
 );
 
 // Mock para simular o DTO com os dados recebidos pelo usuario ao criar um pedido
@@ -86,12 +89,12 @@ export const pedidoDTOMock = new PedidoDTO();
 pedidoDTOMock.id = pedidoModelMock.id;
 pedidoDTOMock.numeroPedido = pedidoModelMock.numeroPedido;
 pedidoDTOMock.itensPedido = [itemPedidoDTOMock];
-pedidoDTOMock.pago = false;
+pedidoDTOMock.statusPagamento = pedidoModelMock.statusPagamento;
 pedidoDTOMock.statusPedido = pedidoModelMock.statusPedido;
 pedidoDTOMock.criadoEm = '2024-01-25T00:05:04.941Z';
 pedidoDTOMock.atualizadoEm = '2024-01-25T00:05:04.941Z';
 pedidoDTOMock.cliente = clienteDTOMock;
-pedidoDTOMock.qrCode = null;
+pedidoDTOMock.qrCode = '00020101021243650016COM';
 
 export const pagamentoResponseMock = {
   qrCode: '00020101021243650016COM',
@@ -111,8 +114,8 @@ export const pagamentoResponseMock = {
       },
     },
   },
-  pago: false,
-  statusPedido: 'recebido',
+  statusPagamento: 'pendente',
+  statusPedido: 'aguardando_pagamento',
 };
 
 // Mock jest das funções do typeORM interagindo com a tabela pedido

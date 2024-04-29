@@ -105,7 +105,7 @@ describe('PedidoRepository', () => {
   });
 
   it('deve alterar o status de pagamento do pedido', async () => {
-    const novoStatusPagamento = true;
+    const novoStatusPagamento = 'pago';
 
     pedidoTypeORMMock.findOne.mockResolvedValue(
       Promise.resolve(pedidoModelMock),
@@ -119,7 +119,7 @@ describe('PedidoRepository', () => {
     );
 
     expect(pedidoTypeORMMock.update).toHaveBeenCalledWith(pedidoId, {
-      pago: novoStatusPagamento,
+      statusPagamento: novoStatusPagamento,
     });
     expect(pedidoTypeORMMock.findOne).toHaveBeenCalledWith({
       where: { id: pedidoId },

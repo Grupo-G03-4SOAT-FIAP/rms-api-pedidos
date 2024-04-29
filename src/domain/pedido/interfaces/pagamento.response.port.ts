@@ -16,6 +16,6 @@ export interface PagamentoResponse {
       };
     };
   }[];
-  pago: boolean;
+  statusPagamento: string;
   StatusPedido: string;
 }
