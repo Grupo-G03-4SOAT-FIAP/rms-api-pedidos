@@ -94,7 +94,7 @@ pedidoDTOMock.statusPedido = pedidoModelMock.statusPedido;
 pedidoDTOMock.criadoEm = '2024-01-25T00:05:04.941Z';
 pedidoDTOMock.atualizadoEm = '2024-01-25T00:05:04.941Z';
 pedidoDTOMock.cliente = clienteDTOMock;
-pedidoDTOMock.qrCode = '00020101021243650016COM';
+pedidoDTOMock.qrCode = null;
 
 export const pagamentoResponseMock = {
   qrCode: '00020101021243650016COM',
