@@ -82,9 +82,9 @@ export class SQLDTOFactory {
       pedido.statusPedido as StatusPedido,
       pedido.numeroPedido,
       pedido.statusPagamento as StatusPagamento,
+      pedido.id,
       clienteEntity,
       clientePedidoEntity,
-      pedido.id,
       pedido.criadoEm,
       pedido.atualizadoEm,
     );

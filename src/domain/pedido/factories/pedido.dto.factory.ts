@@ -36,7 +36,7 @@ export class PedidoDTOFactory implements IPedidoDTOFactory {
     pedidoDTO.id = pedido.id;
     pedidoDTO.numeroPedido = pedido.numeroPedido;
     pedidoDTO.itensPedido = itensPedido;
-    pedidoDTO.pago = pedido.pago;
+    pedidoDTO.statusPagamento = pedido.statusPagamento;
     pedidoDTO.statusPedido = pedido.statusPedido;
     pedidoDTO.criadoEm = pedido.criadoEm;
     pedidoDTO.atualizadoEm = pedido.atualizadoEm;
