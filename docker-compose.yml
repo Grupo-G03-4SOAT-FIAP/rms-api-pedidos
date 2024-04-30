@@ -4,7 +4,7 @@ services:
   db-pedidos:
     container_name: db-pedidos
     hostname: db-pedidos
-    image: postgres:16.1
+    image: postgres:15.6
     ports:
       - '5432:5432'
     expose:
