@@ -1,15 +1,15 @@
 import { ClienteEntity } from 'src/domain/cliente/entities/cliente.entity';
-import { StatusPedido } from '../enums/pedido.enum';
+import { StatusPagamento, StatusPedido } from '../enums/pedido.enum';
 import { ItemPedidoEntity } from './item_pedido.entity';
 
 export class PedidoEntity {
   private _itensPedido: ItemPedidoEntity[];
   private _statusPedido: StatusPedido;
   private _numeroPedido: string;
-  private _pago: boolean;
+  private _statusPagamento: StatusPagamento;
+  private _id?: string;
   private _cliente?: ClienteEntity;
   private _clientePedido?: ClienteEntity;
-  private _id?: string;
   private _criadoEm?: string;
   private _atualizadoEm?: string;
 
@@ -17,16 +17,16 @@ export class PedidoEntity {
     itensPedido: ItemPedidoEntity[],
     statusPedido: StatusPedido,
     numeroPedido: string,
-    pago: boolean,
+    statusPagamento: StatusPagamento,
+    id?: string,
     cliente?: ClienteEntity,
     clientePedido?: ClienteEntity,
-    id?: string,
     criadoEm?: string,
     atualizadoEm?: string,
   ) {
     this.id = id;
     this.numeroPedido = numeroPedido;
-    this.pago = pago;
+    this.statusPagamento = statusPagamento;
     this.itensPedido = itensPedido;
     this.cliente = cliente;
     this.clientePedido = clientePedido;
@@ -59,12 +59,12 @@ export class PedidoEntity {
     this._numeroPedido = numeroPedido;
   }
 
-  get pago(): boolean {
-    return this._pago;
+  get statusPagamento(): StatusPagamento {
+    return this._statusPagamento;
   }
 
-  set pago(pago: boolean) {
-    this._pago = pago;
+  set statusPagamento(statusPagamento: StatusPagamento) {
+    this._statusPagamento = statusPagamento;
   }
 
   get cliente(): ClienteEntity | undefined {

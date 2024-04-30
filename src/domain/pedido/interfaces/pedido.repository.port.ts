@@ -9,7 +9,7 @@ export interface IPedidoRepository {
   ): Promise<PedidoEntity | null>;
   editarStatusPagamento(
     pedidoId: string,
-    statusPagamento: boolean,
+    statusPagamento: string,
   ): Promise<PedidoEntity | null>;
   listarPedidos(): Promise<PedidoEntity[] | []>;
   listarPedidosRecebido(): Promise<PedidoEntity[] | []>;

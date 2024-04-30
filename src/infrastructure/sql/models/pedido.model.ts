@@ -34,8 +34,8 @@ export class PedidoModel {
   @JoinColumn({ name: 'id_cliente_pedido' })
   clientePedido: ClientePedidoModel | null;
 
-  @Column({ name: 'pago', nullable: false })
-  pago: boolean;
+  @Column({ name: 'status_pagamento', nullable: false })
+  statusPagamento: string;
 
   @Column({ name: 'status_pedido', length: 20, nullable: false })
   statusPedido: string;

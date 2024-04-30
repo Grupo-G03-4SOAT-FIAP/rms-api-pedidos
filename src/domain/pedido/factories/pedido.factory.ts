@@ -10,8 +10,9 @@ import { ClienteEntity } from 'src/domain/cliente/entities/cliente.entity';
 import { ClienteNaoLocalizadoErro } from 'src/domain/cliente/exceptions/cliente.exception';
 import { CriaPedidoDTO } from 'src/presentation/rest/v1/presenters/pedido/pedido.dto';
 import { PedidoEntity } from '../entities/pedido.entity';
-import { StatusPedido } from '../enums/pedido.enum';
+import { StatusPagamento, StatusPedido } from '../enums/pedido.enum';
 import { ClienteDTO } from 'src/presentation/rest/v1/presenters/cliente/cliente.dto';
+import { v4 as uuid4 } from 'uuid';
 
 @Injectable()
 export class PedidoFactory implements IPedidoFactory {
@@ -70,9 +71,10 @@ export class PedidoFactory implements IPedidoFactory {
 
     return new PedidoEntity(
       itensPedido,
-      StatusPedido.RECEBIDO,
+      StatusPedido.AGUARDANDO_PAGAMENTO,
       numeroPedido,
-      false,
+      StatusPagamento.PENDENTE,
+      uuid4(),
     );
   }
 }

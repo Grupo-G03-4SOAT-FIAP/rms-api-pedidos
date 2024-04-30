@@ -70,10 +70,10 @@ export class PedidoRepository implements IPedidoRepository {
 
   async editarStatusPagamento(
     pedidoId: string,
-    statusPagamento: boolean,
+    statusPagamento: string,
   ): Promise<PedidoEntity> {
     await this.pedidoRepository.update(pedidoId, {
-      pago: statusPagamento,
+      statusPagamento: statusPagamento,
     });
 
     const pedidoModelAtualizado = await this.pedidoRepository.findOne({

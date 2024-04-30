@@ -65,6 +65,7 @@ describe('PedidoFactory', () => {
     );
 
     const result = await pedidoFactory.criarEntidadePedido(criaPedidoDTOMock);
+    pedidoEntityNotIdMock.id = result.id;
 
     expect(pedidoServiceMock.gerarNumeroPedido).toHaveBeenCalled();
     expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalled();

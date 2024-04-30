@@ -7,7 +7,10 @@ import { ClienteModel } from '../models/cliente.model';
 import { ClienteEntity } from 'src/domain/cliente/entities/cliente.entity';
 import { PedidoModel } from '../models/pedido.model';
 import { PedidoEntity } from 'src/domain/pedido/entities/pedido.entity';
-import { StatusPedido } from 'src/domain/pedido/enums/pedido.enum';
+import {
+  StatusPagamento,
+  StatusPedido,
+} from 'src/domain/pedido/enums/pedido.enum';
 import { ItemPedidoEntity } from 'src/domain/pedido/entities/item_pedido.entity';
 import { ClientePedidoModel } from '../models/cliente_pedido.model';
 
@@ -78,10 +81,10 @@ export class SQLDTOFactory {
       itensPedido,
       pedido.statusPedido as StatusPedido,
       pedido.numeroPedido,
-      pedido.pago,
+      pedido.statusPagamento as StatusPagamento,
+      pedido.id,
       clienteEntity,
       clientePedidoEntity,
-      pedido.id,
       pedido.criadoEm,
       pedido.atualizadoEm,
     );
