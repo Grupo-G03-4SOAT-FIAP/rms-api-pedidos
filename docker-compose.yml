@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  db:
-    container_name: db
-    hostname: db
+  db-pedidos:
+    container_name: db-pedidos
+    hostname: db-pedidos
     image: postgres:16.1
     ports:
       - '5432:5432'
@@ -28,9 +28,9 @@ services:
     networks:
       - default
 
-  api:
-    container_name: api
-    hostname: api
+  api-pedidos:
+    container_name: api-pedidos
+    hostname: api-pedidos
     build:
       context: .
       dockerfile: Dockerfile
@@ -41,7 +41,7 @@ services:
     env_file:
       - .env
     environment:
-      DB_HOST: db
+      DB_HOST: db-pedidos
       DB_PORT: 5432
       DB_USER: ${DB_USERNAME:-pguser}
       DB_PASSWORD: ${DB_PASSWORD:-pgpwd}
@@ -49,17 +49,11 @@ services:
       DB_SSL: ${DB_SSL:-false}
       COGNITO_USER_POOL_ID: ${COGNITO_USER_POOL_ID:-}
       COGNITO_CLIENT_ID: ${COGNITO_CLIENT_ID:-}
-      ENABLE_MERCADOPAGO: ${ENABLE_MERCADOPAGO:-false}
-      ACCESS_TOKEN_MERCADOPAGO: ${ACCESS_TOKEN_MERCADOPAGO:-}
-      USER_ID_MERCADOPAGO: ${USER_ID_MERCADOPAGO:-}
-      EXTERNAL_POS_ID_MERCADOPAGO: ${EXTERNAL_POS_ID_MERCADOPAGO:-}
-      WEBHOOK_URL_MERCADOPAGO: ${WEBHOOK_URL_MERCADOPAGO:-}
-      IDEMPOTENCY_KEY_MERCADOPAGO: ${IDEMPOTENCY_KEY_MERCADOPAGO:-a005986e-f97c-4274-91cf-b32d2672824f}
     restart: always
     networks:
       - default
     depends_on:
-      - db
+      - db-pedidos
 
 networks:
   default:
