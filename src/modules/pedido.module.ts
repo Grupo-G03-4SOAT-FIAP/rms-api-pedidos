@@ -19,6 +19,7 @@ import { AuthenticationGuard } from '@nestjs-cognito/auth';
 import { ClientePedidoModel } from 'src/infrastructure/sql/models/cliente_pedido.model';
 import { PagamentoService } from 'src/domain/pedido/services/pagamento.service';
 import { IPagamentoService } from 'src/domain/pedido/interfaces/pagamento.service.port';
+import { PagamentoAdapter } from 'src/infrastructure/adapters/pagamento.adapter';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { IPagamentoService } from 'src/domain/pedido/interfaces/pagamento.servic
       provide: IPagamentoService,
       useClass: PagamentoService,
     },
+    PagamentoAdapter,
     SQLDTOFactory,
     PedidoService,
     AuthenticationGuard,
