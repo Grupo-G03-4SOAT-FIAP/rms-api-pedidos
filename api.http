@@ -65,12 +65,12 @@ GET http://localhost:3002/pedido/ffb5ea00-5e1c-40d1-b9b9-bce8b4baf3dc
 ### Criar pedido
 POST http://localhost:3002/pedido
 Content-Type: application/json
+Authorization: Bearer ???
 
 {
-    //"cpfCliente": "44470640735", // Campo opcional
     "itensPedido": [
         {
-            "produto": "3ecd5148-c71f-412b-9a3a-0c1896375bf2",
+            "produto": "4511aa20-90b2-45ae-bbf8-3ab05ec85983",
             "quantidade": 1
         }
     ]
