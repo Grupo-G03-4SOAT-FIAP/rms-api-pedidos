@@ -26,7 +26,7 @@ services:
       - postgres:/data/postgres
     restart: always
     networks:
-      - default
+      - rms
 
   api-pedidos:
     container_name: api-pedidos
@@ -51,12 +51,13 @@ services:
       COGNITO_CLIENT_ID: ${COGNITO_CLIENT_ID:-}
     restart: always
     networks:
-      - default
+      - rms
     depends_on:
       - db-pedidos
 
 networks:
-  default:
+  rms:
+    name: rms_network
     driver: bridge
 
 volumes:
