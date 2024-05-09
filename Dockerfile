@@ -13,6 +13,6 @@ RUN npm install --ignore-scripts
 RUN npm run build
 
 
-EXPOSE 3000
+EXPOSE 3002
 USER nonroot
 CMD [ "node", "dist/main.js" ]

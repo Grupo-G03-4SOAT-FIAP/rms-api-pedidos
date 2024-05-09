@@ -10,7 +10,7 @@ export class PagamentoAdapter {
   async gerarPagamento(pedido: PedidoEntity): Promise<PagamentoResponse> {
     try {
       const response = await axios.post(
-        this.configService.get<string>('URL_API_PAGAMENTO'),
+        this.configService.get<string>('URL_API_PAGAMENTOS'),
         pedido,
       );
       return response.data.body;
