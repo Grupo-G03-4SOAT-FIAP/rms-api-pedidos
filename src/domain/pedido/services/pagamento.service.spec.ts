@@ -3,7 +3,7 @@ import { PagamentoService } from './pagamento.service';
 import {
   pagamentoAdapterMock,
   pagamentoResponseMock,
-  pedidoEntityMock,
+  pedidoDTOMock,
 } from 'src/mocks/pedido.mock';
 import { PagamentoAdapter } from 'src/infrastructure/adapters/pagamento.adapter';
 import { ProcessarPagamentoErro } from '../exceptions/pedido.exception';
@@ -31,7 +31,7 @@ describe('PagamentoService', () => {
 
   it('deve retornar um pagamento', async () => {
     pagamentoAdapterMock.gerarPagamento.mockReturnValue(pagamentoResponseMock);
-    const pagamento = await pagamentoService.gerarPagamento(pedidoEntityMock);
+    const pagamento = await pagamentoService.gerarPagamento(pedidoDTOMock);
 
     expect(pagamento).toBe(pagamentoResponseMock);
   });
@@ -46,7 +46,7 @@ describe('PagamentoService', () => {
 
     try {
       while (tentativas < maxTentativas) {
-        await pagamentoService.gerarPagamento(pedidoEntityMock);
+        await pagamentoService.gerarPagamento(pedidoDTOMock);
         tentativas++;
       }
     } catch (error) {
