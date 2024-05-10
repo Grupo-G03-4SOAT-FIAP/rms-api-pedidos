@@ -86,7 +86,7 @@ describe('PedidoUseCase', () => {
       pedidoEntityMock,
     );
     expect(pedidoDTOFactoryMock.criarPedidoDTO).toHaveBeenCalledWith(
-      pedidoModelMock,
+      pedidoEntityMock,
     );
     expect(result).toStrictEqual({
       mensagem: 'Pedido criado com sucesso',
