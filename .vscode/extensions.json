@@ -5,6 +5,7 @@
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
 		"donebd.rest-client-api",
+		"SonarSource.sonarlint-vscode",
 		"ms-azuretools.vscode-docker",
 		"ms-kubernetes-tools.vscode-kubernetes-tools",
 		"GitHub.vscode-github-actions",

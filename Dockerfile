@@ -1,9 +1,10 @@
-FROM node:18
+FROM node:20
 
 RUN adduser --system --group --no-create-home nonroot
 
 RUN apt-get update \
-    && apt-get install -y curl build-essential
+    && apt-get install -y curl build-essential \
+    && npm cache clean --force
 
 WORKDIR /app
 
