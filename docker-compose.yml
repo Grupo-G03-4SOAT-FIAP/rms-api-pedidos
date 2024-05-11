@@ -47,6 +47,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-pgpwd}
       DB_NAME: ${DB_NAME:-rms}
       DB_SSL: ${DB_SSL:-false}
+      URL_API_PAGAMENTOS: http://api-pagamentos:3003/pedido
       COGNITO_USER_POOL_ID: ${COGNITO_USER_POOL_ID:-}
       COGNITO_CLIENT_ID: ${COGNITO_CLIENT_ID:-}
     restart: always
