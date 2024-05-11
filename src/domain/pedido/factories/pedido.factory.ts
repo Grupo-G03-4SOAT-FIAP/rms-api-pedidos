@@ -47,7 +47,11 @@ export class PedidoFactory implements IPedidoFactory {
           );
         }
 
-        const itemPedidoEntity = new ItemPedidoEntity(produto, item.quantidade);
+        const itemPedidoEntity = new ItemPedidoEntity(
+          produto,
+          item.quantidade,
+          uuid4(),
+        );
         return itemPedidoEntity;
       }),
     );
