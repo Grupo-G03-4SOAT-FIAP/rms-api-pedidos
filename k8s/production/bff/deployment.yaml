@@ -26,7 +26,7 @@ spec:
               secretProviderClass: aws-secrets-api-pedidos
       containers:
         - name: rms-api-pedidos
-          image: 900534935988.dkr.ecr.us-east-1.amazonaws.com/rms:latest
+          image: 900534935988.dkr.ecr.us-east-1.amazonaws.com/rms-api-pedidos:latest
           envFrom:
             - configMapRef:
                 name: rms-api-pedidos-config
@@ -55,26 +55,6 @@ spec:
                 secretKeyRef:
                   name: db-pedidos-secret
                   key: password
-            - name: ACCESS_TOKEN_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: ACCESS_TOKEN_MERCADOPAGO
-            - name: USER_ID_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: USER_ID_MERCADOPAGO
-            - name: EXTERNAL_POS_ID_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: EXTERNAL_POS_ID_MERCADOPAGO
-            - name: WEBHOOK_URL_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: WEBHOOK_URL_MERCADOPAGO
             - name: COGNITO_USER_POOL_ID
               valueFrom:
                 secretKeyRef:
