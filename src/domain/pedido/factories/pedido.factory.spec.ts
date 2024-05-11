@@ -66,6 +66,7 @@ describe('PedidoFactory', () => {
 
     const result = await pedidoFactory.criarEntidadePedido(criaPedidoDTOMock);
     pedidoEntityNotIdMock.id = result.id;
+    itemPedidoEntityNotIdMock.id = result.itensPedido[0].id;
 
     expect(pedidoServiceMock.gerarNumeroPedido).toHaveBeenCalled();
     expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalled();
@@ -78,6 +79,7 @@ describe('PedidoFactory', () => {
     const result = await pedidoFactory.criarItemPedido(
       criaPedidoDTOMock.itensPedido,
     );
+    itemPedidoEntityNotIdMock.id = result[0].id;
 
     expect(produtoRepositoryMock.buscarProdutoPorId).toHaveBeenCalledWith(
       criaPedidoDTOMock.itensPedido[0].produto,

@@ -9,6 +9,7 @@ import {
   produtoTypeORMMock,
 } from 'src/mocks/produto.mock';
 import { SQLDTOFactory } from '../../factories/sql.dto.factory';
+import { ILike } from 'typeorm';
 
 describe('ProdutoRepository', () => {
   let produtoRepository: ProdutoRepository;
@@ -86,7 +87,7 @@ describe('ProdutoRepository', () => {
     const result = await produtoRepository.buscarProdutoPorNome(nomeProduto);
 
     expect(produtoTypeORMMock.findOne).toHaveBeenCalledWith({
-      where: { nome: nomeProduto },
+      where: { nome: ILike(nomeProduto) },
       relations: relations,
     });
     expect(produtoSQLDTOFactoryMock.criarProdutoDTO).toHaveBeenCalledWith(
@@ -101,7 +102,7 @@ describe('ProdutoRepository', () => {
     const result = await produtoRepository.buscarProdutoPorNome(nomeProduto);
 
     expect(produtoTypeORMMock.findOne).toHaveBeenCalledWith({
-      where: { nome: nomeProduto },
+      where: { nome: ILike(nomeProduto) },
       relations: relations,
     });
     expect(result).toBe(null);

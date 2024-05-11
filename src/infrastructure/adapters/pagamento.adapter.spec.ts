@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PagamentoAdapter } from './pagamento.adapter';
-import { pagamentoResponseMock, pedidoEntityMock } from 'src/mocks/pedido.mock';
+import { pagamentoResponseMock, pedidoDTOMock } from 'src/mocks/pedido.mock';
 
 describe('PagamentoAdapter', () => {
   let pagamentoAdapter: PagamentoAdapter;
@@ -38,7 +38,7 @@ describe('PagamentoAdapter', () => {
       },
     });
 
-    const response = await pagamentoAdapter.gerarPagamento(pedidoEntityMock);
+    const response = await pagamentoAdapter.gerarPagamento(pedidoDTOMock);
     expect(response).toEqual(pagamentoResponseMock);
   });
 
@@ -48,7 +48,7 @@ describe('PagamentoAdapter', () => {
     jest.spyOn(axios, 'post').mockRejectedValue(new Error('Erro'));
 
     await expect(
-      pagamentoAdapter.gerarPagamento(pedidoEntityMock),
+      pagamentoAdapter.gerarPagamento(pedidoDTOMock),
     ).rejects.toThrow('Ocorreu um erro ao gerar o pagamento.');
   });
 });

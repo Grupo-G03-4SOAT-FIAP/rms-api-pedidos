@@ -6,7 +6,7 @@ metadata:
   labels:
     app: rms-api-pedidos
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: rms-api-pedidos
@@ -23,10 +23,10 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: aws-secrets
+              secretProviderClass: aws-secrets-api-pedidos
       containers:
         - name: rms-api-pedidos
-          image: 900534935988.dkr.ecr.us-east-1.amazonaws.com/rms:latest
+          image: 900534935988.dkr.ecr.us-east-1.amazonaws.com/rms-api-pedidos:latest
           envFrom:
             - configMapRef:
                 name: rms-api-pedidos-config
@@ -38,43 +38,23 @@ spec:
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: host
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: port
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: username
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: password
-            - name: ACCESS_TOKEN_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: ACCESS_TOKEN_MERCADOPAGO
-            - name: USER_ID_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: USER_ID_MERCADOPAGO
-            - name: EXTERNAL_POS_ID_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: EXTERNAL_POS_ID_MERCADOPAGO
-            - name: WEBHOOK_URL_MERCADOPAGO
-              valueFrom:
-                secretKeyRef:
-                  name: mercadopago-secret
-                  key: WEBHOOK_URL_MERCADOPAGO
             - name: COGNITO_USER_POOL_ID
               valueFrom:
                 secretKeyRef:
@@ -86,7 +66,7 @@ spec:
                   name: cognito-secret
                   key: COGNITO_CLIENT_ID
           ports:
-            - containerPort: 3000
+            - containerPort: 3002
           resources:
             # You must specify requests for CPU to autoscale
             # based on CPU utilization

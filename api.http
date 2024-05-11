@@ -1,16 +1,16 @@
 ### Healthcheck
-GET http://localhost:3000/
+GET http://localhost:3002/
 
 ##################################################
 
 ### Listar clientes
-GET http://localhost:3000/cliente
+GET http://localhost:3002/cliente
 
 ### Buscar cliente pelo CPF (Login)
-GET http://localhost:3000/cliente/cpf/44470640735
+GET http://localhost:3002/cliente/cpf/44470640735
 
 ### Criar cliente (Cadastro)
-POST http://localhost:3000/cliente
+POST http://localhost:3002/cliente
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### Editar cliente
-PUT http://localhost:3000/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f
+PUT http://localhost:3002/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f
 Content-Type: application/json
 
 {
@@ -30,56 +30,57 @@ Content-Type: application/json
 }
 
 ### Remover cliente
-DELETE http://localhost:3000/cliente/96a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f
+DELETE http://localhost:3002/cliente/96a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f
 
 ##################################################
 
 ### Listar categorias
-GET http://localhost:3000/categoria
+GET http://localhost:3002/categoria
 
 ### Detalhes de uma categoria
-GET http://localhost:3000/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
+GET http://localhost:3002/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
 
 ##################################################
 
 ### Listar produtos
-GET http://localhost:3000/produto
+GET http://localhost:3002/produto
 
 ### Listar produtos por categoria
-GET http://localhost:3000/produto/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
+GET http://localhost:3002/produto/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4
 
 ### Detalhes de um produto
-GET http://localhost:3000/produto/6a1f1007-b48a-458b-8009-9f2701eae8f3
+GET http://localhost:3002/produto/6a1f1007-b48a-458b-8009-9f2701eae8f3
 
 ##################################################
 
 ### Fila de pedidos (com o status "Recebido")
-GET http://localhost:3000/pedido/fila
+GET http://localhost:3002/pedido/fila
 
 ### Listar pedidos (com o status "Pronto" ou "Em preparação")
-GET http://localhost:3000/pedido
+GET http://localhost:3002/pedido
 
 ### Detalhes de um pedido
-GET http://localhost:3000/pedido/ffb5ea00-5e1c-40d1-b9b9-bce8b4baf3dc
+GET http://localhost:3002/pedido/ffb5ea00-5e1c-40d1-b9b9-bce8b4baf3dc
 
 ### Criar pedido
-POST http://localhost:3000/pedido
+POST http://localhost:3002/pedido
 Content-Type: application/json
+Authorization: Bearer ???
 
 {
-    //"cpfCliente": "44470640735", // Campo opcional
     "itensPedido": [
         {
-            "produto": "3ecd5148-c71f-412b-9a3a-0c1896375bf2",
+            "produto": "4511aa20-90b2-45ae-bbf8-3ab05ec85983",
             "quantidade": 1
         }
     ]
 }
 
 ### Editar pedido (atualizar status)
-PUT http://localhost:3000/pedido/10cc2240-cc07-4a02-bb75-e292faef49e3
+PUT http://localhost:3002/pedido/10cc2240-cc07-4a02-bb75-e292faef49e3
 Content-Type: application/json
 
 {
-    "statusPedido": "em preparacao"
+    "pago": true,
+    "statusPedido": "em_preparacao"
 }

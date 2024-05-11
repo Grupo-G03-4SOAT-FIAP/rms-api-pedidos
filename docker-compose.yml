@@ -6,7 +6,7 @@ services:
     hostname: db-pedidos
     image: postgres:15.6
     ports:
-      - '5432:5432'
+      - '8002:5432'
     expose:
       - 5432
     healthcheck:
@@ -26,7 +26,7 @@ services:
       - postgres:/data/postgres
     restart: always
     networks:
-      - default
+      - rms
 
   api-pedidos:
     container_name: api-pedidos
@@ -35,9 +35,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '3002:3002'
     expose:
-      - 3000
+      - 3002
     env_file:
       - .env
     environment:
@@ -52,12 +52,13 @@ services:
       COGNITO_CLIENT_ID: ${COGNITO_CLIENT_ID:-}
     restart: always
     networks:
-      - default
+      - rms
     depends_on:
       - db-pedidos
 
 networks:
-  default:
+  rms:
+    name: rms_network
     driver: bridge
 
 volumes:
