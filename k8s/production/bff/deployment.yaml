@@ -23,7 +23,7 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: aws-secrets
+              secretProviderClass: aws-secrets-api-pedidos
       containers:
         - name: rms-api-pedidos
           image: 900534935988.dkr.ecr.us-east-1.amazonaws.com/rms:latest
@@ -38,22 +38,22 @@ spec:
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: host
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: port
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: username
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-bff-secret
+                  name: db-pedidos-secret
                   key: password
             - name: ACCESS_TOKEN_MERCADOPAGO
               valueFrom:
