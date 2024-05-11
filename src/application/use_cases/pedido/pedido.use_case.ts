@@ -74,10 +74,12 @@ export class PedidoUseCase implements IPedidoUseCase {
     pedido.cliente = clienteCriadoOuAtualizado;
     pedido.clientePedido = this.copiarDadosCliente(clienteCriadoOuAtualizado);
 
-    const pagamentoQRCode = await this.pagamentoService.gerarPagamento(pedido);
-    const pedidoCriado = await this.pedidoRepository.criarPedido(pedido);
-    const pedidoDTO = this.pedidoDTOFactory.criarPedidoDTO(pedidoCriado);
+    const pedidoDTO = this.pedidoDTOFactory.criarPedidoDTO(pedido);
+    const pagamentoQRCode =
+      await this.pagamentoService.gerarPagamento(pedidoDTO);
     pedidoDTO.qrCode = pagamentoQRCode.qrCode;
+    await this.pedidoRepository.criarPedido(pedido);
+
     return {
       mensagem: 'Pedido criado com sucesso',
       body: pedidoDTO,
