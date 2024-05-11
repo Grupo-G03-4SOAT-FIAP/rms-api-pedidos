@@ -1,7 +1,7 @@
-import { PedidoEntity } from '../entities/pedido.entity';
+import { PedidoDTO } from 'src/presentation/rest/v1/presenters/pedido/pedido.dto';
 
 export interface IPagamentoService {
-  gerarPagamento(pedido: PedidoEntity): Promise<any>;
+  gerarPagamento(pedido: PedidoDTO): Promise<any>;
 }
 
 export const IPagamentoService = Symbol('IPagamentoService');
