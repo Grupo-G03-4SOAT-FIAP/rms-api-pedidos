@@ -33,6 +33,10 @@ Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvi
 
 ![mercado-pago](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-monolito/assets/5115895/ad2f673e-ba14-4824-b2dd-24dbbce72bf3)
 
+<br>
+
+![microservices](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/assets/5115895/a258c18d-869e-42e1-8a15-8dad3a7f380f)
+
 ## Executar a aplicação
 
 1. Baixe e instale o Node.js em https://nodejs.org/en/download
