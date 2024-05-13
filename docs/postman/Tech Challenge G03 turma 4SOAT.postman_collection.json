@@ -500,7 +500,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"statusPedido\": \"em preparacao\" // O status pode ser: \"recebido\", \"em preparacao\", \"pronto\", \"finalizado\" ou \"cancelado\".\r\n}",
+							"raw": "{\r\n    \"statusPedido\": \"em_preparacao\" // O status pode ser: \"recebido\", \"em_preparacao\", \"pronto\", \"finalizado\" ou \"cancelado\".\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
