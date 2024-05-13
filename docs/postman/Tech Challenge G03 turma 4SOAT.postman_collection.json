@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ae348b25-08a2-4a08-8809-7455430218df",
+		"_postman_id": "a6ce5fe3-16a3-4552-8550-f7d01dfa8540",
 		"name": "Tech Challenge G03 turma 4SOAT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4241772"
@@ -15,12 +15,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/cliente",
+							"raw": "http://localhost:3002/cliente",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"cliente"
 							]
@@ -43,12 +43,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/cliente",
+							"raw": "http://localhost:3002/cliente",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"cliente"
 							]
@@ -71,12 +71,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
+							"raw": "http://localhost:3002/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"cliente",
 								"6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f"
@@ -91,12 +91,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
+							"raw": "http://localhost:3002/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"cliente",
 								"6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f"
@@ -111,12 +111,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/cliente/cpf/44470640735",
+							"raw": "http://localhost:3002/cliente/cpf/44470640735",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"cliente",
 								"cpf",
@@ -132,12 +132,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/cliente/597b4e37-d22e-4fcd-ac1e-de0fed96177f",
+							"raw": "http://localhost:3002/cliente/597b4e37-d22e-4fcd-ac1e-de0fed96177f",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"cliente",
 								"597b4e37-d22e-4fcd-ac1e-de0fed96177f"
@@ -157,12 +157,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/categoria",
+							"raw": "http://localhost:3002/categoria",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"categoria"
 							]
@@ -176,15 +176,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4",
+							"raw": "http://localhost:3002/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"categoria",
-								"9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4"
+								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
 							]
 						}
 					},
@@ -205,12 +205,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/categoria/",
+							"raw": "http://localhost:3002/categoria/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"categoria",
 								""
@@ -234,15 +234,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4",
+							"raw": "http://localhost:3002/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"categoria",
-								"9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4"
+								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
 							]
 						}
 					},
@@ -254,15 +254,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/categoria/895c6ff3-c5a7-468e-9895-af61523fbac4",
+							"raw": "http://localhost:3002/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"categoria",
-								"895c6ff3-c5a7-468e-9895-af61523fbac4"
+								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
 							]
 						}
 					},
@@ -279,12 +279,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/produto",
+							"raw": "http://localhost:3002/produto",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"produto"
 							]
@@ -298,16 +298,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/produto/categoria/9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4",
+							"raw": "http://localhost:3002/produto/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"produto",
 								"categoria",
-								"9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4"
+								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
 							]
 						}
 					},
@@ -319,15 +319,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/produto/6a1f1007-b48a-458b-8009-9f2701eae8f3",
+							"raw": "http://localhost:3002/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"produto",
-								"6a1f1007-b48a-458b-8009-9f2701eae8f3"
+								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
 							]
 						}
 					},
@@ -348,12 +348,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/produto",
+							"raw": "http://localhost:3002/produto",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"produto"
 							]
@@ -376,15 +376,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/produto/6a1f1007-b48a-458b-8009-9f2701eae8f3",
+							"raw": "http://localhost:3002/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"produto",
-								"6a1f1007-b48a-458b-8009-9f2701eae8f3"
+								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
 							]
 						}
 					},
@@ -396,15 +396,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/produto/d8349d11-9356-448d-8bb8-a8e73d8dc255",
+							"raw": "http://localhost:3002/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"produto",
-								"d8349d11-9356-448d-8bb8-a8e73d8dc255"
+								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
 							]
 						}
 					},
@@ -421,12 +421,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pedido/fila",
+							"raw": "http://localhost:3002/pedido/fila",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"pedido",
 								"fila"
@@ -441,12 +441,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pedido/c7e86741-4e46-4019-a88e-6617c9c37db8",
+							"raw": "http://localhost:3002/pedido/c7e86741-4e46-4019-a88e-6617c9c37db8",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"pedido",
 								"c7e86741-4e46-4019-a88e-6617c9c37db8"
@@ -472,7 +472,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"itensPedido\": [\r\n        {\r\n            \"produto\": \"3ecd5148-c71f-412b-9a3a-0c1896375bf2\",\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"itensPedido\": [\r\n        {\r\n            \"produto\": \"4511aa20-90b2-45ae-bbf8-3ab05ec85983\",\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -480,12 +480,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pedido",
+							"raw": "http://localhost:3002/pedido",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"pedido"
 							]
@@ -500,7 +500,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"statusPedido\": \"em preparacao\" // O status pode ser: \"recebido\", \"em preparacao\", \"pronto\", \"finalizado\" ou \"cancelado\".\r\n}",
+							"raw": "{\r\n    \"statusPedido\": \"em_preparacao\" // O status pode ser: \"recebido\", \"em_preparacao\", \"pronto\", \"finalizado\" ou \"cancelado\".\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -508,12 +508,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pedido/26f1d105-6005-4d04-8d49-411994241442",
+							"raw": "http://localhost:3002/pedido/26f1d105-6005-4d04-8d49-411994241442",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"pedido",
 								"26f1d105-6005-4d04-8d49-411994241442"
@@ -528,12 +528,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pedido",
+							"raw": "http://localhost:3002/pedido",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"pedido"
 							]
