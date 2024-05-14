@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a6ce5fe3-16a3-4552-8550-f7d01dfa8540",
+		"_postman_id": "490d86ec-aa61-4d75-b820-3b4962586c31",
 		"name": "Tech Challenge G03 turma 4SOAT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4241772"
@@ -176,12 +176,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+							"raw": "http://localhost:3001/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3002",
+							"port": "3001",
 							"path": [
 								"categoria",
 								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
@@ -205,12 +205,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/categoria/",
+							"raw": "http://localhost:3001/categoria/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3002",
+							"port": "3001",
 							"path": [
 								"categoria",
 								""
@@ -234,12 +234,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+							"raw": "http://localhost:3001/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3002",
+							"port": "3001",
 							"path": [
 								"categoria",
 								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
@@ -319,12 +319,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
+							"raw": "http://localhost:3001/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3002",
+							"port": "3001",
 							"path": [
 								"produto",
 								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
@@ -348,12 +348,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/produto",
+							"raw": "http://localhost:3001/produto",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3002",
+							"port": "3001",
 							"path": [
 								"produto"
 							]
@@ -376,12 +376,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
+							"raw": "http://localhost:3001/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3002",
+							"port": "3001",
 							"path": [
 								"produto",
 								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"

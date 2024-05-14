@@ -23,9 +23,11 @@ export class ProdutoModel {
   descricao: string;
 
   @Column({
-    type: 'numeric',
     name: 'valor_unitario',
     nullable: false,
+    type: 'numeric',
+    precision: 12,
+    scale: 2,
     transformer: new ColumnNumericTransformer(),
   })
   valorUnitario: number;
