@@ -8,4 +8,4 @@ metadata:
 data:
   DB_NAME: "pedidos"
   DB_SSL: "false"
-  URL_API_PAGAMENTOS: ""
+  URL_API_PAGAMENTOS: "http://rms-api-pagamentos.rms.svc.cluster.local:80/pedido"
