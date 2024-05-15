@@ -7,7 +7,7 @@ import { PedidoDTO } from 'src/presentation/rest/v1/presenters/pedido/pedido.dto
 
 @Injectable()
 export class PagamentoService implements IPagamentoService {
-  constructor(private readonly pagamentoAdapter: PagamentoAdapter) {}
+  constructor(private readonly pagamentoAdapter: PagamentoAdapter) { }
 
   async gerarPagamento(pedido: PedidoDTO): Promise<PagamentoResponse> {
     const maxTentativas = 3;
@@ -28,4 +28,25 @@ export class PagamentoService implements IPagamentoService {
       'Não foi possível gerar o pagamento após várias tentativas',
     );
   }
+
+  async olaMundo() {
+    let a;
+    let b;
+    let c;
+    let d;
+
+    a = 1;
+    b = "1";
+
+    c = a + b;
+
+    const e = 0;
+
+    let f = a + "";
+
+    if (a + b == "11") {
+      console.log("What!?😱");
+    }
+  }
+
 }
