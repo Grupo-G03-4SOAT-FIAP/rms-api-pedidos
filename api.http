@@ -81,6 +81,6 @@ PUT http://localhost:3002/pedido/10cc2240-cc07-4a02-bb75-e292faef49e3
 Content-Type: application/json
 
 {
-    "pago": true,
+    "statusPagamento": "pago",
     "statusPedido": "em_preparacao"
 }
