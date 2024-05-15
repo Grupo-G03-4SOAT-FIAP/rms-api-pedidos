@@ -1,0 +1,33 @@
+{
+  "config": {
+    "topics": "categorias,produtos",
+    "schema.context.name": "default",
+    "input.data.format": "AVRO",
+    "input.key.format": "AVRO",
+    "delete.enabled": "false",
+    "connector.class": "PostgresSink",
+    "name": "PostgresSinkConnector_0",
+    "kafka.auth.mode": "KAFKA_API_KEY",
+    "kafka.api.key": "POPXZIHNC7ERAUAR",
+    "kafka.api.secret": "****************************************************************",
+    "connection.host": "****************************************************************.rds.amazonaws.com",
+    "connection.port": "****************************",
+    "connection.user": "****************************",
+    "connection.password": "****************************",
+    "db.name": "pedidos",
+    "ssl.mode": "prefer",
+    "insert.mode": "UPSERT",
+    "table.types": "TABLE",
+    "db.timezone": "UTC",
+    "date.timezone": "DB_TIMEZONE",
+    "pk.mode": "record_value",
+    "pk.fields": "id",
+    "auto.create": "false",
+    "auto.evolve": "false",
+    "quote.sql.identifiers": "ALWAYS",
+    "batch.sizes": "3000",
+    "max.poll.interval.ms": "300000",
+    "max.poll.records": "500",
+    "tasks.max": "1"
+  }
+}

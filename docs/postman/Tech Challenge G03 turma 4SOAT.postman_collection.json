@@ -1,545 +1,669 @@
 {
 	"info": {
-		"_postman_id": "490d86ec-aa61-4d75-b820-3b4962586c31",
+		"_postman_id": "905e432e-976e-473d-8299-6d0563edb18b",
 		"name": "Tech Challenge G03 turma 4SOAT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4241772"
 	},
 	"item": [
 		{
-			"name": "Clientes",
+			"name": "API Catálogo",
 			"item": [
 				{
-					"name": "Listar clientes",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/cliente",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"cliente"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Criar cliente (Cadastro)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cpf\": \"44470640735\", // Você pode gerar um número de CPF sem pontuação em https://www.4devs.com.br/gerador_de_cpf\r\n    \"nome\": \"Fulano da Silva Santos\",\r\n    \"email\": \"fulano@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Categorias",
+					"item": [
+						{
+							"name": "Listar categorias",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/categoria",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"categoria"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3002/cliente",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"cliente"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Editar cliente",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cpf\": \"44470640735\",\r\n    \"nome\": \"Fulano da Silva Santos\",\r\n    \"email\": \"fulano.1998@gmail.com\" // Novo e-mail\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Remover categoria",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"categoria",
+										"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3002/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"cliente",
-								"6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f"
-							]
+						{
+							"name": "Criar categoria",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Lanches\",\r\n    \"descricao\": \"Lanches para todos os gostos!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/categoria/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"categoria",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar categoria",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Bebidas\",\r\n    \"descricao\": \"Refrigerantes, sucos e bebidas alcoolicas\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"categoria",
+										"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalhes de uma categoria",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"categoria",
+										"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Remover cliente",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"cliente",
-								"6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f"
-							]
+					"name": "Produtos",
+					"item": [
+						{
+							"name": "Listar produtos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/produto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar produtos por Categoria",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/produto/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"produto",
+										"categoria",
+										"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remover produto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"produto",
+										"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar produto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"X-Tudo\",\r\n    \"valorUnitario\": 29.9,\r\n    \"descricao\": \"Ingredientes: 1 hambúrguer, 50 g de bacon picados, 1 ovo, 2 fatias de presunto, 2 fatias de mussarela (cheddar), 1 folha de alface, 1 rodela de tomate, 1 pão de hambúrguer, 1 colher de maionese, Catchup a gosto (opcional)\",\r\n    \"imagemUrl\": \"https://conteudo.imguol.com.br/c/entretenimento/17/2023/05/24/x-tudo-brasileiro-tem-variedade-de-ingredientes-de-acordo-com-preferencias-regionais-aqui-versao-com-carne-bovina-tomato-salsicha-presunto-bacon-e-queijo-no-pao-1684938396547_v2_1x1.jpg\",\r\n    \"categoriaId\": \"9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4\" // Colocar o UUID da categoria aqui\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/produto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar produto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"X-Salada\",\r\n    \"valorUnitario\": 16,\r\n    \"descricao\": \"Ingredientes: 1 hambúrguer, 50 g de bacon picados, 1 ovo, 2 fatias de presunto, 2 fatias de mussarela (cheddar), 1 folha de alface, 1 rodela de tomate, 1 pão de hambúrguer, 1 colher de maionese, Catchup a gosto (opcional)\",\r\n    \"imagemUrl\": \"https://anamariabraga.globo.com/wp-content/uploads/2016/11/x-salada-classico.jpg\",\r\n    \"categoriaId\": \"e5f99bae-0a90-4ca0-b6f8-ab9efb41e721\" // Colocar o UUID da categoria aqui\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"produto",
+										"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalhes de um produto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"produto",
+										"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar pelo CPF (Login)",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/cliente/cpf/44470640735",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"cliente",
-								"cpf",
-								"44470640735"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Detalhes de um cliente",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/cliente/597b4e37-d22e-4fcd-ac1e-de0fed96177f",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"cliente",
-								"597b4e37-d22e-4fcd-ac1e-de0fed96177f"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
 		{
-			"name": "Categorias",
+			"name": "API de Pedidos",
 			"item": [
 				{
-					"name": "Listar categorias",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/categoria",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"categoria"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Remover categoria",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3001/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"categoria",
-								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Criar categoria",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Lanches\",\r\n    \"descricao\": \"Lanches para todos os gostos!\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Pedidos",
+					"item": [
+						{
+							"name": "Fila de pedidos (com o status \"Recebido\")",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3002/pedido/fila",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"pedido",
+										"fila"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3001/categoria/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"categoria",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Editar categoria",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Bebidas\",\r\n    \"descricao\": \"Refrigerantes, sucos e bebidas alcoolicas\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Detalhes de um pedido",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3002/pedido/c7e86741-4e46-4019-a88e-6617c9c37db8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"pedido",
+										"c7e86741-4e46-4019-a88e-6617c9c37db8"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3001/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"categoria",
-								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Detalhes de uma categoria",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"categoria",
-								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Produtos",
-			"item": [
-				{
-					"name": "Listar produtos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/produto",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"produto"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Listar produtos por Categoria",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/produto/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"produto",
-								"categoria",
-								"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Remover produto",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3001/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"produto",
-								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Criar produto",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"X-Tudo\",\r\n    \"valorUnitario\": 29.9,\r\n    \"descricao\": \"Ingredientes: 1 hambúrguer, 50 g de bacon picados, 1 ovo, 2 fatias de presunto, 2 fatias de mussarela (cheddar), 1 folha de alface, 1 rodela de tomate, 1 pão de hambúrguer, 1 colher de maionese, Catchup a gosto (opcional)\",\r\n    \"imagemUrl\": \"https://conteudo.imguol.com.br/c/entretenimento/17/2023/05/24/x-tudo-brasileiro-tem-variedade-de-ingredientes-de-acordo-com-preferencias-regionais-aqui-versao-com-carne-bovina-tomato-salsicha-presunto-bacon-e-queijo-no-pao-1684938396547_v2_1x1.jpg\",\r\n    \"categoriaId\": \"9fbc614b-9b44-4d35-8ec7-36e55ba7f0f4\" // Colocar o UUID da categoria aqui\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Criar pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "Informe aqui o IdToken gerado pela API do Cognito",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"itensPedido\": [\r\n        {\r\n            \"produto\": \"4511aa20-90b2-45ae-bbf8-3ab05ec85983\",\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/pedido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"pedido"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3001/produto",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"produto"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Editar produto",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"X-Salada\",\r\n    \"valorUnitario\": 16,\r\n    \"descricao\": \"Ingredientes: 1 hambúrguer, 50 g de bacon picados, 1 ovo, 2 fatias de presunto, 2 fatias de mussarela (cheddar), 1 folha de alface, 1 rodela de tomate, 1 pão de hambúrguer, 1 colher de maionese, Catchup a gosto (opcional)\",\r\n    \"imagemUrl\": \"https://anamariabraga.globo.com/wp-content/uploads/2016/11/x-salada-classico.jpg\",\r\n    \"categoriaId\": \"e5f99bae-0a90-4ca0-b6f8-ab9efb41e721\" // Colocar o UUID da categoria aqui\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Editar pedido (alterar status)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"statusPagamento\": \"pago\", // O statusPagamento pode ser: \"pago\", \"recusado\" ou \"pendente\".\r\n    \"statusPedido\": \"em_preparacao\" // O statusPedido pode ser: \"recebido\", \"em_preparacao\", \"pronto\", \"finalizado\" ou \"cancelado\".\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/pedido/26f1d105-6005-4d04-8d49-411994241442",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"pedido",
+										"26f1d105-6005-4d04-8d49-411994241442"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3001/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"produto",
-								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
-							]
+						{
+							"name": "Listar pedidos (com o status \"Pronto\" ou \"Em preparação\")",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3002/pedido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Detalhes de um produto",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"produto",
-								"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
-							]
+					"name": "Clientes",
+					"item": [
+						{
+							"name": "Listar clientes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3002/cliente",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar cliente (Cadastro)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cpf\": \"44470640735\", // Você pode gerar um número de CPF sem pontuação em https://www.4devs.com.br/gerador_de_cpf\r\n    \"nome\": \"Fulano da Silva Santos\",\r\n    \"email\": \"fulano@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/cliente",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar cliente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cpf\": \"44470640735\",\r\n    \"nome\": \"Fulano da Silva Santos\",\r\n    \"email\": \"fulano.1998@gmail.com\" // Novo e-mail\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"cliente",
+										"6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remover cliente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3002/cliente/6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"cliente",
+										"6a9d3e75-06e2-4066-aa4a-9c2a5f44ba3f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar pelo CPF (Login)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3002/cliente/cpf/44470640735",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"cliente",
+										"cpf",
+										"44470640735"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalhes de um cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3002/cliente/597b4e37-d22e-4fcd-ac1e-de0fed96177f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"cliente",
+										"597b4e37-d22e-4fcd-ac1e-de0fed96177f"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Pedidos",
-			"item": [
-				{
-					"name": "Fila de pedidos (com o status \"Recebido\")",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/pedido/fila",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"pedido",
-								"fila"
-							]
-						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Detalhes de um pedido",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/pedido/c7e86741-4e46-4019-a88e-6617c9c37db8",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"pedido",
-								"c7e86741-4e46-4019-a88e-6617c9c37db8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Criar pedido",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
+					"name": "Catálogo",
+					"item": [
+						{
+							"name": "Produtos",
+							"item": [
 								{
-									"key": "token",
-									"value": "Informe aqui o IdToken gerado pela API do Cognito",
-									"type": "string"
+									"name": "Listar produtos",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3002/produto",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3002",
+											"path": [
+												"produto"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Detalhes de um produto",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3002/produto/4511aa20-90b2-45ae-bbf8-3ab05ec85983",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3002",
+											"path": [
+												"produto",
+												"4511aa20-90b2-45ae-bbf8-3ab05ec85983"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Listar produtos por Categoria Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3002/produto/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3002",
+											"path": [
+												"produto",
+												"categoria",
+												"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"itensPedido\": [\r\n        {\r\n            \"produto\": \"4511aa20-90b2-45ae-bbf8-3ab05ec85983\",\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Categorias",
+							"item": [
+								{
+									"name": "Listar categorias",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3002/categoria",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3002",
+											"path": [
+												"categoria"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Detalhes de uma categoria",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3002/categoria/43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3002",
+											"path": [
+												"categoria",
+												"43a7f9e1-632b-4cb6-b7d7-38e1004f2a9c"
+											]
+										}
+									},
+									"response": []
 								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3002/pedido",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"pedido"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Editar pedido (e alterar status)",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"statusPedido\": \"em_preparacao\" // O status pode ser: \"recebido\", \"em_preparacao\", \"pronto\", \"finalizado\" ou \"cancelado\".\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3002/pedido/26f1d105-6005-4d04-8d49-411994241442",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"pedido",
-								"26f1d105-6005-4d04-8d49-411994241442"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Listar pedidos (com o status \"Pronto\" ou \"Em preparação\")",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3002/pedido",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"pedido"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
@@ -659,7 +783,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"AuthFlow\": \"CUSTOM_AUTH\", // CUSTOM_AUTH requer a criação e configuração de Lambda triggers\r\n    \"AuthParameters\": {\r\n        \"USERNAME\": \"38742612047\" // CPF do Cliente aqui // O CPF do usuário guest/anônimo é 00000000191\r\n    },\r\n    \"ClientId\": \"???\" // Informe o Client ID da sua aplicação aqui\r\n}",
+							"raw": "{\r\n    \"AuthFlow\": \"CUSTOM_AUTH\", // CUSTOM_AUTH requer a criação e configuração de Lambda triggers\r\n    \"AuthParameters\": {\r\n        \"USERNAME\": \"00000000191\" // CPF do Cliente aqui // O CPF do usuário guest/anônimo é 00000000191\r\n    },\r\n    \"ClientId\": \"???\" // Informe o Client ID da sua aplicação aqui\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -695,7 +819,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "// Consulte o campo \"IdToken\" na resposta para obter o seu \"Authorization\"\r\n{\r\n    \"ClientId\": \"???\", // Informe o Client ID da sua aplicação aqui\r\n    \"ChallengeName\": \"CUSTOM_CHALLENGE\", // CUSTOM_CHALLENGE requer a criação e configuração de Lambda triggers\r\n    // Para obter uma Session execute primeiro o InitiateAuth\r\n    \"Session\": \"???\",\r\n    \"ChallengeResponses\": {\r\n        \"ANSWER\": \"answer\",\r\n        \"USERNAME\": \"38742612047\" // CPF do Cliente aqui // O CPF do usuário guest/anônimo é 00000000191\r\n    }\r\n}",
+							"raw": "// Consulte o campo \"IdToken\" na resposta para obter o seu \"Authorization\"\r\n{\r\n    \"ClientId\": \"???\", // Informe o Client ID da sua aplicação aqui\r\n    \"ChallengeName\": \"CUSTOM_CHALLENGE\", // CUSTOM_CHALLENGE requer a criação e configuração de Lambda triggers\r\n    // Para obter uma Session execute primeiro o InitiateAuth\r\n    \"Session\": \"???\",\r\n    \"ChallengeResponses\": {\r\n        \"ANSWER\": \"answer\",\r\n        \"USERNAME\": \"00000000191\" // CPF do Cliente aqui // O CPF do usuário guest/anônimo é 00000000191\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -769,6 +893,77 @@
 								"{userPoolId}",
 								".well-known",
 								"jwks.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API de Pagamentos",
+			"item": [
+				{
+					"name": "Criar Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"8a08e625-6747-475d-a1f3-ea059ead745d\",\r\n    \"numeroPedido\": \"638692\",\r\n    \"itensPedido\": [\r\n        {\r\n            \"quantidade\": 1,\r\n            \"produto\": {\r\n                \"id\": \"ceb54f86-1f86-4138-a47a-03d8dc9fcdca\",\r\n                \"nome\": \"X-tudo\",\r\n                \"descricao\": \"Ingredientes: 1 Hambúrguer, 50 G De Bacon Picados, 1 Ovo, 2 Fatias De Presunto, 2 Fatias De Mussarela (cheddar), 1 Folha De Alface, 1 Rodela De Tomate, 1 Pão De Hambúrguer, 1 Colher De Maionese, Catchup A Gosto (opcional)\",\r\n                \"valorUnitario\": 29.9,\r\n                \"categoria\": {\r\n                    \"id\": \"46891fe2-3a09-4cd1-8864-dfb99c2aa79a\",\r\n                    \"nome\": \"Lanches\",\r\n                    \"descricao\": \"Lanches Para Todos Os Gostos!\"\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"resource\": \"https://api.mercadolibre.com/merchant_orders/15140831325\",\r\n    \"topic\": \"merchant_order\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/webhook?id=15140831325&topic=merchant_order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"webhook"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "15140831325"
+								},
+								{
+									"key": "topic",
+									"value": "merchant_order"
+								}
 							]
 						}
 					},

@@ -1,0 +1,29 @@
+{
+  "config": {
+    "connector.class": "PostgresSource",
+    "name": "PostgresSourceConnector_0",
+    "kafka.auth.mode": "KAFKA_API_KEY",
+    "kafka.api.key": "OP3SCR7CZG2VFDAL",
+    "kafka.api.secret": "****************************************************************",
+    "schema.context.name": "default",
+    "connection.host": "****************************************************************.rds.amazonaws.com",
+    "connection.port": "****************************",
+    "connection.user": "****************************",
+    "connection.password": "****************************",
+    "db.name": "catalogo",
+    "ssl.mode": "prefer",
+    "table.whitelist": "categorias, produtos",
+    "timestamp.column.name": "atualizado_em",
+    "table.types": "TABLE",
+    "db.timezone": "UTC",
+    "timestamp.granularity": "CONNECT_LOGICAL",
+    "numeric.mapping": "best_fit",
+    "quote.sql.identifiers": "ALWAYS",
+    "transaction.isolation.mode": "DEFAULT",
+    "poll.interval.ms": "5000",
+    "batch.max.rows": "100",
+    "timestamp.delay.interval.ms": "0",
+    "output.data.format": "AVRO",
+    "tasks.max": "1"
+  }
+}
