@@ -1,2 +1,0 @@
-Topic prefix = "" (vazio)
-Table name format = "" (vazio)
