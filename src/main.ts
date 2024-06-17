@@ -8,8 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
   const config = new DocumentBuilder()
-    .setTitle('RMS API')
-    .setDescription('[ Base URL: http://localhost:3000/ ]')
+    .setTitle('API de Pedidos')
+    .setDescription('Microsserviço de Pedidos do Sistema de Gestão de Restaurantes')
     .setVersion('0.0.1')
     .build();
   const document = SwaggerModule.createDocument(app, config);
