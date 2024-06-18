@@ -60,6 +60,7 @@ networks:
   rms:
     name: rms_network
     driver: bridge
+    external: true
 
 volumes:
   postgres:
