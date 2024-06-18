@@ -9,7 +9,9 @@ async function bootstrap() {
   app.use(helmet());
   const config = new DocumentBuilder()
     .setTitle('API de Pedidos')
-    .setDescription('Microsserviço de Pedidos do Sistema de Gestão de Restaurantes')
+    .setDescription(
+      'Microsserviço de Pedidos do Sistema de Gestão de Restaurantes',
+    )
     .setVersion('0.0.1')
     .build();
   const document = SwaggerModule.createDocument(app, config);

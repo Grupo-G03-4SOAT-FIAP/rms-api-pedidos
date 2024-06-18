@@ -3,10 +3,10 @@ import { HealthController } from './health.controller';
 import { HealthCheckService } from '@nestjs/terminus';
 
 const mockResult = {
-  "status": "ok",
-  "info": {},
-  "error": {},
-  "details": {}
+  status: 'ok',
+  info: {},
+  error: {},
+  details: {},
 };
 
 const healthCheckServiceMock = {
@@ -35,10 +35,10 @@ describe('HealthController', () => {
     const result = await healthController.check();
 
     expect(result).toEqual({
-      "status": "ok",
-      "info": {},
-      "error": {},
-      "details": {}
+      status: 'ok',
+      info: {},
+      error: {},
+      details: {},
     });
   });
 });
