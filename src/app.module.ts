@@ -4,17 +4,16 @@ import { HttpModule } from '@nestjs/axios';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './infrastructure/sql/database/postgres.config.service';
 import { CognitoAuthModule } from '@nestjs-cognito/auth';
-
-import { AppController } from './presentation/rest/v1/controllers/app/app.controller';
-import { AppUseCase } from './application/use_cases/app/app.use_case';
 import { CategoriaModule } from './modules/categoria.module';
 import { ClienteModule } from './modules/client.module';
 import { ProdutoModule } from './modules/produto.module';
 import { PedidoModule } from './modules/pedido.module';
+import { HealthModule } from './modules/health.module';
 
 @Module({
   imports: [
     HttpModule,
+    HealthModule,
     CategoriaModule,
     ClienteModule,
     ProdutoModule,
@@ -38,7 +37,5 @@ import { PedidoModule } from './modules/pedido.module';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AppController],
-  providers: [AppUseCase],
 })
-export class AppModule {}
+export class AppModule { }
