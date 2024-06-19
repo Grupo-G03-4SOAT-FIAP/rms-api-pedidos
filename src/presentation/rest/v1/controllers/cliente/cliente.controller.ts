@@ -9,6 +9,7 @@ import {
   Inject,
   NotFoundException,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -83,7 +84,7 @@ export class ClienteController {
     type: ConflictError,
   })
   async atualizar(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() cliente: AtualizaClienteDTO,
   ) {
     try {
@@ -113,7 +114,7 @@ export class ClienteController {
     description: 'Cliente informado não existe',
     type: NotFoundError,
   })
-  async remover(@Param('id') id: string) {
+  async remover(@Param('id', ParseUUIDPipe) id: string) {
     try {
       return await this.clienteUseCase.excluirCliente(id);
     } catch (error) {
@@ -136,7 +137,7 @@ export class ClienteController {
     description: 'Cliente informado não existe',
     type: NotFoundError,
   })
-  async buscar(@Param('id') id: string) {
+  async buscar(@Param('id', ParseUUIDPipe) id: string) {
     try {
       return await this.clienteUseCase.buscarClientePorId(id);
     } catch (error) {

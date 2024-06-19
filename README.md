@@ -210,6 +210,30 @@ https://github.com/Grupo-G03-4SOAT-FIAP/rms-cognito-triggers
 Infrastructure as code (IaC) com Terraform\
 https://github.com/Grupo-G03-4SOAT-FIAP/rms-iac
 
+## OWASP ZAP
+
+<details>
+
+<summary>Como escanear a API usando o OWASP ZAP?</summary>
+
+### ZAP - API Scan
+
+Para escanear todos os endpoints da API em busca de possíveis vulnerabilidades, a partir do swagger, siga o passo a passo abaixo.
+
+1. Execute a aplicação usando o Docker Compose;
+2. Execute o comando abaixo:
+```bash
+docker run --name zap --network host -v $(pwd):/zap/wrk/:rw -t zaproxy/zap-stable zap-api-scan.py -t http://localhost:3002/swagger-json -f openapi -r report.html
+```
+
+> Substitua os parenteses em `$(pwd)` por chaves `${pwd}` no Windows.
+
+O report em formato HTML será gerado no diretório atual.
+
+[Clique aqui](https://www.zaproxy.org/docs/docker/api-scan/) para obter mais informações sobre o API Scan do ZAP.
+
+</details>
+
 ## Requisitos
 
 *Node.js v20.12.0 (LTS), Docker Desktop 24.0.6 e Kubernetes v1.28*\
