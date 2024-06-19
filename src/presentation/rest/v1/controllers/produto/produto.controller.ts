@@ -4,6 +4,7 @@ import {
   Inject,
   NotFoundException,
   Param,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IProdutoUseCase } from 'src/domain/produto/interfaces/produto.use_case.port';
@@ -30,7 +31,7 @@ export class ProdutoController {
     description: 'Produto informado não existe',
     type: NotFoundError,
   })
-  async buscar(@Param('id') id: string) {
+  async buscar(@Param('id', ParseUUIDPipe) id: string) {
     try {
       return await this.produtoUseCase.buscarProduto(id);
     } catch (error) {
@@ -65,7 +66,7 @@ export class ProdutoController {
     description: 'Categoria informada não existe',
     type: NotFoundError,
   })
-  async listarPorCategoria(@Param('id') id: string) {
+  async listarPorCategoria(@Param('id', ParseUUIDPipe) id: string) {
     try {
       return await this.produtoUseCase.listarProdutosPorCategoria(id);
     } catch (error) {
