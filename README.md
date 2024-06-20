@@ -37,6 +37,16 @@ Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvi
 
 ![microservices](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/assets/5115895/a258c18d-869e-42e1-8a15-8dad3a7f380f)
 
+<details>
+
+<summary>Por que optamos por uma SAGA coreografada?</summary>
+
+## SAGA Coreografada
+
+Nossa aplicação é relativamente simples. Dada a simplicidade da nossa aplicação, no nosso cenário não corremos o risco de enfrentar problemas de dependências cíclicas, nem tampouco enfrentamos dificuldades em fazer o entendimento e o mapeamento de todos os membros envolvidos na SAGA, já que a nossa SAGA possui poucos membros. Sabendo disso, dado o nosso contexto, optamos pela SAGA coreografada, conforme recomendado por Chris Richardson no livro "[Microservices Patterns](https://www.amazon.com.br/Microservice-Patterns-examples-Chris-Richardson/dp/1617294543)", indo de encontro também a recomendação feita pelo professor durante as aulas.
+
+</details>
+
 ## Executar a aplicação
 
 1. Baixe e instale o Node.js em https://nodejs.org/en/download
