@@ -37,6 +37,16 @@ Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvi
 
 ![microservices](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/assets/5115895/a258c18d-869e-42e1-8a15-8dad3a7f380f)
 
+<details>
+
+<summary>Por que optamos por uma SAGA coreografada?</summary>
+
+## SAGA Coreografada
+
+Nossa aplicação é relativamente simples. Dada a simplicidade da nossa aplicação, no nosso cenário não corremos o risco de enfrentar problemas de dependências cíclicas, nem tampouco enfrentamos dificuldades em fazer o entendimento e o mapeamento de todos os membros envolvidos na SAGA, já que a nossa SAGA possui poucos membros. Sabendo disso, dado o nosso contexto, optamos pela SAGA coreografada, conforme recomendado por Chris Richardson no livro "[Microservices Patterns](https://www.amazon.com.br/Microservice-Patterns-examples-Chris-Richardson/dp/1617294543)", indo de encontro também a recomendação feita pelo professor durante as aulas.
+
+</details>
+
 ## Executar a aplicação
 
 1. Baixe e instale o Node.js em https://nodejs.org/en/download
@@ -57,7 +67,7 @@ Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvi
 1. Clone este repositório;
 2. Navegue até a pasta raiz do projeto usando o Terminal;
 3. Faça uma cópia do arquivo `.env.template` com o nome `.env` e preencha as variáveis de ambiente dentro dele;
-4. Execute o comando `docker-compose up`
+4. Execute o comando `docker-compose up -d`
 5. Acesse o Swagger em http://localhost:3000/swagger/
 
 </details>
@@ -212,13 +222,16 @@ https://github.com/Grupo-G03-4SOAT-FIAP/rms-iac
 
 ## OWASP ZAP
 
+#### Reports OWASP ZAP API Scan
+Os reports de "antes" e "depois" encontram-se na pasta `/docs/zap-scanning-report`
+
 <details>
 
 <summary>Como escanear a API usando o OWASP ZAP?</summary>
 
 ### ZAP - API Scan
 
-Para escanear todos os endpoints da API em busca de possíveis vulnerabilidades, a partir do swagger, siga o passo a passo abaixo.
+Para escanear todos os endpoints da API em busca de vulnerabilidades siga o passo a passo abaixo.
 
 1. Execute a aplicação usando o Docker Compose;
 2. Execute o comando abaixo:
