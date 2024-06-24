@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PedidoUseCase } from '../application/use_cases/pedido/pedido.use_case';
 import { PedidoDTOFactory } from '../domain/pedido/factories/pedido.dto.factory';
@@ -19,7 +19,12 @@ import { AuthenticationGuard } from '@nestjs-cognito/auth';
 import { ClientePedidoModel } from 'src/infrastructure/sql/models/cliente_pedido.model';
 import { PagamentoService } from 'src/domain/pedido/services/pagamento.service';
 import { IPagamentoService } from 'src/domain/pedido/interfaces/pagamento.service.port';
-import { PagamentoAdapter } from 'src/infrastructure/adapters/pagamento.adapter';
+import { IFilaNovaCobrancaAdapter } from 'src/domain/pedido/interfaces/nova_cobranca.port';
+import { FilaNovaCobrancaAdapter } from 'src/infrastructure/adapters/filas/nova_cobranca/nova_cobranca.adapter';
+import { SqsModule } from '@ssut/nestjs-sqs';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SQSClient } from '@aws-sdk/client-sqs';
+import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/cobranca/cobranca.message_handler';
 
 @Module({
   imports: [
@@ -30,10 +35,50 @@ import { PagamentoAdapter } from 'src/infrastructure/adapters/pagamento.adapter'
       ItemPedidoModel,
       ClientePedidoModel,
     ]),
+    SqsModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => {
+        return {
+          consumers: [
+            {
+              name: configService.getOrThrow<string>(
+                'NOME_FILA_COBRANCA_GERADA',
+              ),
+              queueUrl: configService.getOrThrow<string>(
+                'URL_FILA_COBRANCA_GERADA',
+              ),
+              region: configService.getOrThrow<string>(
+                'REGION_FILA_COBRANCA_GERADA',
+              ),
+              sqs: new SQSClient({
+                region: configService.getOrThrow<string>(
+                  'REGION_FILA_COBRANCA_GERADA',
+                ),
+                endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
+              }),
+            },
+          ],
+          producers: [
+            {
+              name: configService.getOrThrow<string>('NOME_FILA_NOVA_COBRANCA'),
+              queueUrl: configService.getOrThrow<string>(
+                'URL_FILA_NOVA_COBRANCA',
+              ),
+              region: configService.getOrThrow<string>(
+                'REGION_FILA_NOVA_COBRANCA',
+              ),
+            },
+          ],
+        };
+      },
+      inject: [ConfigService],
+    }),
   ],
   controllers: [PedidoController],
   providers: [
+    Logger,
     PedidoUseCase,
+    CobrancaMessageHandler,
     {
       provide: IPedidoUseCase,
       useClass: PedidoUseCase,
@@ -58,7 +103,10 @@ import { PagamentoAdapter } from 'src/infrastructure/adapters/pagamento.adapter'
       provide: IPagamentoService,
       useClass: PagamentoService,
     },
-    PagamentoAdapter,
+    {
+      provide: IFilaNovaCobrancaAdapter,
+      useClass: FilaNovaCobrancaAdapter,
+    },
     SQLDTOFactory,
     PedidoService,
     AuthenticationGuard,

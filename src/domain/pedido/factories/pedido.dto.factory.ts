@@ -41,6 +41,7 @@ export class PedidoDTOFactory implements IPedidoDTOFactory {
     pedidoDTO.criadoEm = pedido.criadoEm;
     pedidoDTO.atualizadoEm = pedido.atualizadoEm;
     pedidoDTO.cliente = cliente;
+    pedidoDTO.qrCode = pedido.qrCode;
     return pedidoDTO;
   }
 

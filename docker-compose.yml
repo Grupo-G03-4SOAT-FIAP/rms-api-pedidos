@@ -47,14 +47,39 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-pgpwd}
       DB_NAME: ${DB_NAME:-rms}
       DB_SSL: ${DB_SSL:-false}
-      URL_API_PAGAMENTOS: http://api-pagamentos:3003/pedido
       COGNITO_USER_POOL_ID: ${COGNITO_USER_POOL_ID:-}
       COGNITO_CLIENT_ID: ${COGNITO_CLIENT_ID:-}
+      LOCALSTACK_ENDPOINT: http://localstack:4566
+      NOME_FILA_NOVA_COBRANCA: ${NOME_FILA_NOVA_COBRANCA:-nova-cobranca}
+      URL_FILA_NOVA_COBRANCA: http://localstack:4566/000000000000/nova-cobranca
+      REGION_FILA_NOVA_COBRANCA: ${REGION_FILA_NOVA_COBRANCA:-us-east-1}
+      NOME_FILA_COBRANCA_GERADA: ${NOME_FILA_COBRANCA_GERADA:-cobranca-gerada}
+      URL_FILA_COBRANCA_GERADA: http://localstack:4566/000000000000/cobranca-gerada
+      REGION_FILA_COBRANCA_GERADA: ${REGION_FILA_COBRANCA_GERADA:-us-east-1}
     restart: always
     networks:
       - rms
     depends_on:
       - db-pedidos
+      - localstack
+
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME:-localstack-main}"
+    image: localstack/localstack:3.5.0
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=${DEBUG:-0}
+      - SERVICES=sqs
+    volumes:
+      - "./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"  # ready hook
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: always
+    networks:
+      - rms
 
 networks:
   rms:

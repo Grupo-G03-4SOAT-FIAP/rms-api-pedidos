@@ -32,6 +32,7 @@ pedidoModelMock.statusPagamento = 'pendente';
 pedidoModelMock.statusPedido = 'aguardando_pagamento';
 pedidoModelMock.criadoEm = '2024-01-25T00:05:04.941Z';
 pedidoModelMock.atualizadoEm = '2024-01-25T00:05:04.941Z';
+pedidoModelMock.qrCode = undefined;
 
 // Mock para simular dados da entidade pedido com todos os itens
 export const pedidoEntityMock = new PedidoEntity(
@@ -80,10 +81,6 @@ criaPedidoDTOMock.itensPedido = [
 ];
 criaPedidoDTOMock.cpfCliente = '83904665030';
 
-// Mock para simular o DTO com os dados recebidos pelo usuario ao atualizar um pedido
-export const atualizaPedidoDTOMock = new AtualizaPedidoDTO();
-atualizaPedidoDTOMock.statusPedido = StatusPedido.RECEBIDO;
-
 // Mock para simular o DTO com dados de pedido enviados para o usuario ao responder uma requisição
 export const pedidoDTOMock = new PedidoDTO();
 pedidoDTOMock.id = pedidoModelMock.id;
@@ -94,29 +91,13 @@ pedidoDTOMock.statusPedido = pedidoModelMock.statusPedido;
 pedidoDTOMock.criadoEm = '2024-01-25T00:05:04.941Z';
 pedidoDTOMock.atualizadoEm = '2024-01-25T00:05:04.941Z';
 pedidoDTOMock.cliente = clienteDTOMock;
-pedidoDTOMock.qrCode = null;
+pedidoDTOMock.qrCode = pedidoModelMock.qrCode;
 
-export const pagamentoResponseMock = {
-  qrCode: '00020101021243650016COM',
-  id: '0a14aa4e-75e7-405f-8301-81f60646c93d',
-  numeroPedido: '05012024',
-  itensPedido: {
-    quantidade: 1,
-    produto: {
-      id: '0a14aa4e-75e7-405f-8301-81f60646c93d',
-      nome: 'Produto X',
-      descricao: 'Teste Produto X',
-      valorUnitario: 29.9,
-      categoria: {
-        id: '0a14aa4e-75e7-405f-8301-81f60646c93d',
-        nome: 'Lanche',
-        descricao: 'Lanche X Tudo',
-      },
-    },
-  },
-  statusPagamento: 'pendente',
-  statusPedido: 'aguardando_pagamento',
-};
+// Mock para simular o DTO com os dados recebidos pelo usuario ao atualizar um pedido
+export const atualizaPedidoDTOMock = new AtualizaPedidoDTO();
+atualizaPedidoDTOMock.statusPedido = StatusPedido.RECEBIDO;
+atualizaPedidoDTOMock.statusPagamento = StatusPagamento.PAGO;
+atualizaPedidoDTOMock.qrCode = pedidoDTOMock.qrCode;
 
 // Mock jest das funções do typeORM interagindo com a tabela pedido
 export const pedidoTypeORMMock: jest.Mocked<Repository<PedidoModel>> = {
@@ -132,6 +113,7 @@ export const pedidoTypeORMMock: jest.Mocked<Repository<PedidoModel>> = {
 // Mock jest das funções do repository pedido
 export const pedidoRepositoryMock = {
   criarPedido: jest.fn(),
+  editarQrCodePedido: jest.fn(),
   editarStatusPedido: jest.fn(),
   editarStatusPagamento: jest.fn(),
   buscarPedido: jest.fn(),
@@ -172,8 +154,8 @@ export const pedidoUseCaseMock = {
   listarPedidosRecebido: jest.fn(),
 };
 
-// Mock jest das funções do adapter pagamento
-export const pagamentoAdapterMock = {
+// Mock jest das funções do adapter da fila de nova-cobranca
+export const filaNovaCobrancaAdapterMock = {
   gerarPagamento: jest.fn(),
 };
 

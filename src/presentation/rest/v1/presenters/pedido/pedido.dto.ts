@@ -44,17 +44,23 @@ export class CriaPedidoDTO {
 }
 
 export class AtualizaPedidoDTO {
+  @IsOptional()
   @IsString()
   @IsEnum(StatusPedido)
   @IsDefined({ each: true, message: 'O status do pedido não pode ser nulo' })
   @ApiProperty({ description: 'Status do pedido' })
-  statusPedido: StatusPedido;
+  statusPedido?: StatusPedido;
 
   @IsOptional()
   @IsEnum(StatusPagamento)
   @IsDefined({ each: true, message: 'O status do pagamento não pode ser nulo' })
   @ApiProperty({ description: 'Status do pagamento', required: false })
   statusPagamento?: StatusPagamento;
+
+  @IsOptional()
+  @IsDefined({ each: true, message: 'O QR Code não pode ser nulo' })
+  @ApiProperty({ description: 'QR Code para pagamento no formato EMVCo' })
+  qrCode?: string = null;
 }
 
 export class PedidoDTO {

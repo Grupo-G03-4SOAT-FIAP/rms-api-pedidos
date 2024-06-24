@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PagamentoService } from './pagamento.service';
 import {
-  pagamentoAdapterMock,
-  pagamentoResponseMock,
+  filaNovaCobrancaAdapterMock,
   pedidoDTOMock,
 } from 'src/mocks/pedido.mock';
-import { PagamentoAdapter } from 'src/infrastructure/adapters/pagamento.adapter';
+import { IFilaNovaCobrancaAdapter } from '../interfaces/nova_cobranca.port';
 import { ProcessarPagamentoErro } from '../exceptions/pedido.exception';
 
 describe('PagamentoService', () => {
@@ -16,8 +15,8 @@ describe('PagamentoService', () => {
       providers: [
         PagamentoService,
         {
-          provide: PagamentoAdapter,
-          useValue: pagamentoAdapterMock,
+          provide: IFilaNovaCobrancaAdapter,
+          useValue: filaNovaCobrancaAdapterMock,
         },
       ],
     }).compile();
@@ -29,18 +28,15 @@ describe('PagamentoService', () => {
     jest.clearAllMocks();
   });
 
-  it('deve retornar um pagamento', async () => {
-    pagamentoAdapterMock.gerarPagamento.mockReturnValue(pagamentoResponseMock);
-    const pagamento = await pagamentoService.gerarPagamento(pedidoDTOMock);
-
-    expect(pagamento).toBe(pagamentoResponseMock);
+  it('deve gerar cobrança', async () => {
+    expect(() => pagamentoService.gerarPagamento(pedidoDTOMock)).not.toThrow();
   });
 
-  it('deve lançar uma exceção ao gerar um pagamento', async () => {
+  it('deve lançar uma exceção ao gerar cobrança', async () => {
     const maxTentativas = 3;
     let tentativas = 0;
 
-    pagamentoAdapterMock.gerarPagamento.mockRejectedValue(
+    filaNovaCobrancaAdapterMock.gerarPagamento.mockRejectedValue(
       new Error('Ocorreu um erro ao gerar o pagamento.'),
     );
 
@@ -51,9 +47,7 @@ describe('PagamentoService', () => {
       }
     } catch (error) {
       expect(error).toBeInstanceOf(ProcessarPagamentoErro);
-      expect(error.message).toBe(
-        'Não foi possível gerar o pagamento após várias tentativas',
-      );
+      expect(error.message).toBe('Não foi possível gerar o pagamento');
     }
   });
 });

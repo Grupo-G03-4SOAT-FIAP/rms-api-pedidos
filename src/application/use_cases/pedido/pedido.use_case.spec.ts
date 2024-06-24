@@ -7,7 +7,6 @@ import { PedidoNaoLocalizadoErro } from 'src/domain/pedido/exceptions/pedido.exc
 import {
   atualizaPedidoDTOMock,
   criaPedidoDTOMock,
-  pagamentoResponseMock,
   pagamentoServiceMock,
   pedidoDTOFactoryMock,
   pedidoDTOMock,
@@ -67,7 +66,6 @@ describe('PedidoUseCase', () => {
   it('deve criar um pedido com sucesso', async () => {
     pedidoFactoryMock.criarEntidadePedido.mockReturnValue(pedidoEntityMock);
     pedidoRepositoryMock.criarPedido.mockReturnValue(pedidoModelMock);
-    pagamentoServiceMock.gerarPagamento.mockReturnValue(pagamentoResponseMock);
     pedidoDTOFactoryMock.criarPedidoDTO.mockReturnValue(pedidoDTOMock);
     pedidoFactoryMock.criarEntidadeCliente.mockReturnValue(pedidoEntityMock);
     clienteRepositoryMock.buscarClientePorCPF.mockReturnValue(clienteModelMock);
@@ -97,6 +95,7 @@ describe('PedidoUseCase', () => {
   it('deve editar o status de um pedido com sucesso', async () => {
     pedidoRepositoryMock.buscarPedido.mockReturnValue(pedidoModelMock);
     pedidoRepositoryMock.editarStatusPedido.mockReturnValue(pedidoModelMock);
+    pedidoRepositoryMock.editarQrCodePedido.mockReturnValue(pedidoModelMock);
     pedidoDTOFactoryMock.criarPedidoDTO.mockReturnValue(pedidoDTOMock);
 
     const result = await pedidoUseCase.editarPedido(
@@ -133,6 +132,9 @@ describe('PedidoUseCase', () => {
       pedidoModelPagoMock,
     );
     pedidoRepositoryMock.editarStatusPedido.mockReturnValue(
+      pedidoModelPagoMock,
+    );
+    pedidoRepositoryMock.editarQrCodePedido.mockReturnValue(
       pedidoModelPagoMock,
     );
     pedidoDTOFactoryMock.criarPedidoDTO.mockReturnValue(pedidoDTOMock);
