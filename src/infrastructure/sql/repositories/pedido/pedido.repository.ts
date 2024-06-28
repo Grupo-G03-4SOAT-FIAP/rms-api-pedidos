@@ -50,6 +50,23 @@ export class PedidoRepository implements IPedidoRepository {
     return this.sqlDTOFactory.criarPedidoDTO(pedidoComItemModel);
   }
 
+  async editarQrCodePedido(
+    pedidoId: string,
+    qrCode: string,
+  ): Promise<PedidoEntity> {
+    await this.pedidoRepository.update(pedidoId, {
+      qrCode: qrCode,
+    });
+    const pedidoModelAtualizado = await this.pedidoRepository.findOne({
+      where: { id: pedidoId },
+      relations: this.relations,
+    });
+    if (pedidoModelAtualizado) {
+      return this.sqlDTOFactory.criarPedidoDTO(pedidoModelAtualizado);
+    }
+    return null;
+  }
+
   async editarStatusPedido(
     pedidoId: string,
     statusPedido: string,
@@ -57,7 +74,6 @@ export class PedidoRepository implements IPedidoRepository {
     await this.pedidoRepository.update(pedidoId, {
       statusPedido: statusPedido,
     });
-
     const pedidoModelAtualizado = await this.pedidoRepository.findOne({
       where: { id: pedidoId },
       relations: this.relations,
@@ -75,7 +91,6 @@ export class PedidoRepository implements IPedidoRepository {
     await this.pedidoRepository.update(pedidoId, {
       statusPagamento: statusPagamento,
     });
-
     const pedidoModelAtualizado = await this.pedidoRepository.findOne({
       where: { id: pedidoId },
       relations: this.relations,

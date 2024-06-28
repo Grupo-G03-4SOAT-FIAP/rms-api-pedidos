@@ -68,12 +68,12 @@ jobs:
       # A ordem dos arquivos importa no Kubernetes
       run: |
         kubectl apply \
-        -f k8s/production/bff/namespace.yaml \
-        -f k8s/production/bff/config.yaml \
-        -f k8s/production/bff/service-account.yaml \
-        -f k8s/production/bff/secret-provider.yaml \
-        -f k8s/production/bff/deployment.yaml \
-        -f k8s/production/bff/service.yaml \
-        -f k8s/production/bff/hpa.yaml
+        -f k8s/production/api/namespace.yaml \
+        -f k8s/production/api/config.yaml \
+        -f k8s/production/api/service-account.yaml \
+        -f k8s/production/api/secret-provider.yaml \
+        -f k8s/production/api/deployment.yaml \
+        -f k8s/production/api/service.yaml \
+        -f k8s/production/api/hpa.yaml
 
 # Baseado na Action de exemplo "Deploy to Amazon ECS" do GitHub

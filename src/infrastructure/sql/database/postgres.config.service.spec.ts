@@ -4,7 +4,7 @@ import { PostgresConfigService } from './postgres.config.service';
 
 jest.mock('dotenv');
 jest.mock('fs');
-const mockStripe = () => ({ get: () => 'test' });
+const mockStripe = () => ({ get: () => 'test', getOrThrow: () => 'test' });
 
 describe('PostgresConfigService', () => {
   let postgresConfigService: PostgresConfigService;

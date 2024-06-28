@@ -65,6 +65,36 @@ spec:
                 secretKeyRef:
                   name: cognito-secret
                   key: COGNITO_CLIENT_ID
+            - name: NOME_FILA_NOVA_COBRANCA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-nova-cobranca-secret
+                  key: NOME_FILA_NOVA_COBRANCA
+            - name: URL_FILA_NOVA_COBRANCA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-nova-cobranca-secret
+                  key: URL_FILA_NOVA_COBRANCA
+            - name: REGION_FILA_NOVA_COBRANCA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-nova-cobranca-secret
+                  key: REGION_FILA_NOVA_COBRANCA
+            - name: NOME_FILA_COBRANCA_GERADA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-cobranca-gerada-secret
+                  key: NOME_FILA_COBRANCA_GERADA
+            - name: URL_FILA_COBRANCA_GERADA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-cobranca-gerada-secret
+                  key: URL_FILA_COBRANCA_GERADA
+            - name: REGION_FILA_COBRANCA_GERADA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-cobranca-gerada-secret
+                  key: REGION_FILA_COBRANCA_GERADA
           ports:
             - containerPort: 3002
           resources:

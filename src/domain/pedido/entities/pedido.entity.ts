@@ -12,6 +12,7 @@ export class PedidoEntity {
   private _clientePedido?: ClienteEntity;
   private _criadoEm?: string;
   private _atualizadoEm?: string;
+  private _qrCode?: string;
 
   constructor(
     itensPedido: ItemPedidoEntity[],
@@ -23,6 +24,7 @@ export class PedidoEntity {
     clientePedido?: ClienteEntity,
     criadoEm?: string,
     atualizadoEm?: string,
+    qrCode?: string,
   ) {
     this.id = id;
     this.numeroPedido = numeroPedido;
@@ -33,6 +35,7 @@ export class PedidoEntity {
     this.statusPedido = statusPedido;
     this.criadoEm = criadoEm;
     this.atualizadoEm = atualizadoEm;
+    this._qrCode = qrCode;
   }
 
   get itensPedido(): ItemPedidoEntity[] {
@@ -89,6 +92,14 @@ export class PedidoEntity {
 
   set id(id: string | undefined) {
     this._id = id;
+  }
+
+  get qrCode(): string | undefined {
+    return this._qrCode;
+  }
+
+  set qrCode(qrCode: string | undefined) {
+    this._qrCode = qrCode;
   }
 
   get criadoEm(): string | undefined {

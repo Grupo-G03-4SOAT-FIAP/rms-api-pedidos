@@ -87,6 +87,7 @@ export class SQLDTOFactory {
       clientePedidoEntity,
       pedido.criadoEm,
       pedido.atualizadoEm,
+      pedido.qrCode,
     );
   }
 }

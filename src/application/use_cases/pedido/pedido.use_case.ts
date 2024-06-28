@@ -73,12 +73,9 @@ export class PedidoUseCase implements IPedidoUseCase {
       await this.criarOuAtualizarCliente(cliente);
     pedido.cliente = clienteCriadoOuAtualizado;
     pedido.clientePedido = this.copiarDadosCliente(clienteCriadoOuAtualizado);
-
     const pedidoDTO = this.pedidoDTOFactory.criarPedidoDTO(pedido);
-    const pagamentoQRCode =
-      await this.pagamentoService.gerarPagamento(pedidoDTO);
-    pedidoDTO.qrCode = pagamentoQRCode.qrCode;
     await this.pedidoRepository.criarPedido(pedido);
+    await this.pagamentoService.gerarPagamento(pedidoDTO);
 
     return {
       mensagem: 'Pedido criado com sucesso',
@@ -127,19 +124,25 @@ export class PedidoUseCase implements IPedidoUseCase {
     atualizaPedidoDTO: AtualizaPedidoDTO,
   ): Promise<HTTPResponse<PedidoDTO>> {
     await this.validarPedidoPorId(idPedido);
-
+    let pedidoEditado: PedidoEntity;
     if (atualizaPedidoDTO.statusPagamento !== undefined) {
-      await this.pedidoRepository.editarStatusPagamento(
+      pedidoEditado = await this.pedidoRepository.editarStatusPagamento(
         idPedido,
         atualizaPedidoDTO.statusPagamento,
       );
     }
-
-    const pedidoEditado = await this.pedidoRepository.editarStatusPedido(
-      idPedido,
-      atualizaPedidoDTO.statusPedido,
-    );
-
+    if (atualizaPedidoDTO.statusPedido !== undefined) {
+      pedidoEditado = await this.pedidoRepository.editarStatusPedido(
+        idPedido,
+        atualizaPedidoDTO.statusPedido,
+      );
+    }
+    if (atualizaPedidoDTO.qrCode !== undefined) {
+      pedidoEditado = await this.pedidoRepository.editarQrCodePedido(
+        idPedido,
+        atualizaPedidoDTO.qrCode,
+      );
+    }
     const pedidoDTO = this.pedidoDTOFactory.criarPedidoDTO(pedidoEditado);
     return {
       mensagem: 'Pedido atualizado com sucesso',

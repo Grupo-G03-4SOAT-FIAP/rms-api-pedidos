@@ -82,5 +82,6 @@ Content-Type: application/json
 
 {
     "statusPagamento": "pago",
-    "statusPedido": "em_preparacao"
+    "statusPedido": "em_preparacao",
+    "qrCode": ""
 }

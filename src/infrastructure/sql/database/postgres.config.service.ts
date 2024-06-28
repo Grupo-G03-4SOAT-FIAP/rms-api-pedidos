@@ -10,11 +10,11 @@ export class PostgresConfigService implements TypeOrmOptionsFactory {
   createTypeOrmOptions(): TypeOrmModuleOptions | Promise<TypeOrmModuleOptions> {
     return {
       type: 'postgres',
-      host: this.configService.get<string>('DB_HOST'),
-      port: this.configService.get<number>('DB_PORT'),
-      username: this.configService.get<string>('DB_USERNAME'),
-      password: this.configService.get<string>('DB_PASSWORD'),
-      database: this.configService.get<string>('DB_NAME'),
+      host: this.configService.getOrThrow<string>('DB_HOST'),
+      port: this.configService.getOrThrow<number>('DB_PORT'),
+      username: this.configService.getOrThrow<string>('DB_USERNAME'),
+      password: this.configService.getOrThrow<string>('DB_PASSWORD'),
+      database: this.configService.getOrThrow<string>('DB_NAME'),
       ssl: this.configService.get<string>('DB_SSL')?.toLowerCase() === 'true',
       entities: [__dirname + '/../../../**/*.model.{js,ts}'],
       synchronize: true,

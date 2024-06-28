@@ -45,4 +45,7 @@ export class PedidoModel {
 
   @UpdateDateColumn({ name: 'atualizado_em' })
   atualizadoEm: string;
+
+  @Column({ name: 'qr_code', nullable: true })
+  qrCode: string;
 }

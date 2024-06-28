@@ -3,6 +3,10 @@ import { PedidoEntity } from '../entities/pedido.entity';
 export interface IPedidoRepository {
   criarPedido(pedido: PedidoEntity): Promise<PedidoEntity>;
   buscarPedido(pedidoId: string): Promise<PedidoEntity | null>;
+  editarQrCodePedido(
+    pedidoId: string,
+    qrCode: string,
+  ): Promise<PedidoEntity | null>;
   editarStatusPedido(
     pedidoId: string,
     statusPedido: string,
