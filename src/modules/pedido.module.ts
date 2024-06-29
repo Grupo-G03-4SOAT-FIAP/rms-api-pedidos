@@ -24,7 +24,8 @@ import { FilaNovaCobrancaAdapter } from 'src/infrastructure/adapters/filas/nova_
 import { SqsModule } from '@ssut/nestjs-sqs';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SQSClient } from '@aws-sdk/client-sqs';
-import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/cobranca/cobranca.message_handler';
+import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/nova_cobranca/nova_cobranca.handler';
+import { FalhaCobrancaMessageHandler } from 'src/infrastructure/message_handlers/falha_cobranca/falha_cobranca.handler';
 
 @Module({
   imports: [
@@ -57,6 +58,23 @@ import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/cobr
                 endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
               }),
             },
+            {
+              name: configService.getOrThrow<string>(
+                'NOME_FILA_FALHA_COBRANCA',
+              ),
+              queueUrl: configService.getOrThrow<string>(
+                'URL_FILA_FALHA_COBRANCA',
+              ),
+              region: configService.getOrThrow<string>(
+                'REGION_FILA_FALHA_COBRANCA',
+              ),
+              sqs: new SQSClient({
+                region: configService.getOrThrow<string>(
+                  'REGION_FILA_FALHA_COBRANCA',
+                ),
+                endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
+              }),
+            },
           ],
           producers: [
             {
@@ -67,6 +85,12 @@ import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/cobr
               region: configService.getOrThrow<string>(
                 'REGION_FILA_NOVA_COBRANCA',
               ),
+              sqs: new SQSClient({
+                region: configService.getOrThrow<string>(
+                  'REGION_FILA_NOVA_COBRANCA',
+                ),
+                endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
+              }),
             },
           ],
         };
@@ -77,8 +101,9 @@ import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/cobr
   controllers: [PedidoController],
   providers: [
     Logger,
-    PedidoUseCase,
     CobrancaMessageHandler,
+    FalhaCobrancaMessageHandler,
+    PedidoUseCase,
     {
       provide: IPedidoUseCase,
       useClass: PedidoUseCase,

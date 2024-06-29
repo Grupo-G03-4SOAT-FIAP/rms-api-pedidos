@@ -56,6 +56,9 @@ services:
       NOME_FILA_COBRANCA_GERADA: ${NOME_FILA_COBRANCA_GERADA:-cobranca-gerada}
       URL_FILA_COBRANCA_GERADA: http://localstack:4566/000000000000/cobranca-gerada
       REGION_FILA_COBRANCA_GERADA: ${REGION_FILA_COBRANCA_GERADA:-us-east-1}
+      NOME_FILA_FALHA_COBRANCA: ${NOME_FILA_FALHA_COBRANCA:-falha-cobranca}
+      URL_FILA_FALHA_COBRANCA: http://localstack:4566/000000000000/falha-cobranca
+      REGION_FILA_FALHA_COBRANCA: ${REGION_FILA_FALHA_COBRANCA:-us-east-1}
     restart: always
     networks:
       - rms
