@@ -95,6 +95,21 @@ spec:
                 secretKeyRef:
                   name: sqs-fila-cobranca-gerada-secret
                   key: REGION_FILA_COBRANCA_GERADA
+            - name: NOME_FILA_FALHA_COBRANCA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-falha-cobranca-secret
+                  key: NOME_FILA_FALHA_COBRANCA
+            - name: URL_FILA_FALHA_COBRANCA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-falha-cobranca-secret
+                  key: URL_FILA_FALHA_COBRANCA
+            - name: REGION_FILA_FALHA_COBRANCA
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-falha-cobranca-secret
+                  key: REGION_FILA_FALHA_COBRANCA
           ports:
             - containerPort: 3002
           resources:
