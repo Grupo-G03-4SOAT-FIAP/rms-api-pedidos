@@ -1,24 +1,24 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { pedidoDTOMock, pedidoUseCaseMock } from 'src/mocks/pedido.mock';
-import { FalhaCobrancaMessageHandler } from './falha_cobranca.handler';
 import { IPedidoUseCase } from 'src/domain/pedido/interfaces/pedido.use_case.port';
-import { messageMock } from 'src/mocks/message.mock';
+import { messageIdMock } from 'src/mocks/message.mock';
 import { Logger } from '@nestjs/common';
 import { AtualizaPedidoDTO } from 'src/presentation/rest/v1/presenters/pedido/pedido.dto';
+import { FalhaPagamentoMessageHandler } from './falha_pag.handler';
 import {
-  StatusPedido,
   StatusPagamento,
+  StatusPedido,
 } from 'src/domain/pedido/enums/pedido.enum';
 
-describe('FalhaCobrancaMessageHandler', () => {
-  let falhaCobrancaMessageHandler: FalhaCobrancaMessageHandler;
+describe('FalhaPagamentoMessageHandler', () => {
+  let falhaPagamentoMessageHandler: FalhaPagamentoMessageHandler;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         Logger,
-        FalhaCobrancaMessageHandler,
+        FalhaPagamentoMessageHandler,
         {
           provide: IPedidoUseCase,
           useValue: pedidoUseCaseMock,
@@ -33,8 +33,8 @@ describe('FalhaCobrancaMessageHandler', () => {
       ],
     }).compile();
 
-    falhaCobrancaMessageHandler = module.get<FalhaCobrancaMessageHandler>(
-      FalhaCobrancaMessageHandler,
+    falhaPagamentoMessageHandler = module.get<FalhaPagamentoMessageHandler>(
+      FalhaPagamentoMessageHandler,
     );
   });
 
@@ -42,18 +42,18 @@ describe('FalhaCobrancaMessageHandler', () => {
     jest.clearAllMocks();
   });
 
-  it('deve consumir mensagem de falha na cobrança', async () => {
+  it('deve consumir mensagem de falha no pagamento', async () => {
     const HTTPResponse = {
       mensagem: 'Pedido atualizado com sucesso',
       body: pedidoDTOMock,
     };
     const atualizaPedidoDTO: AtualizaPedidoDTO = {
+      statusPagamento: StatusPagamento.RECUSADO,
       statusPedido: StatusPedido.CANCELADO,
-      statusPagamento: StatusPagamento.ERRO,
     };
     pedidoUseCaseMock.editarPedido.mockReturnValue(HTTPResponse);
 
-    await falhaCobrancaMessageHandler.handleMessage(messageMock);
+    await falhaPagamentoMessageHandler.handleMessage(messageIdMock);
 
     expect(pedidoUseCaseMock.editarPedido).toHaveBeenCalledWith(
       pedidoDTOMock.id,
@@ -61,14 +61,14 @@ describe('FalhaCobrancaMessageHandler', () => {
     );
   });
 
-  it('deve lançar exceção ao consumir mensagem de falha na cobrança', async () => {
+  it('deve lançar exceção ao consumir mensagem de falha no pagamento', async () => {
     const atualizaPedidoDTO: AtualizaPedidoDTO = {
+      statusPagamento: StatusPagamento.RECUSADO,
       statusPedido: StatusPedido.CANCELADO,
-      statusPagamento: StatusPagamento.ERRO,
     };
     pedidoUseCaseMock.editarPedido.mockRejectedValue(new Error('Erro'));
 
-    await falhaCobrancaMessageHandler.handleMessage(messageMock);
+    await falhaPagamentoMessageHandler.handleMessage(messageIdMock);
 
     expect(pedidoUseCaseMock.editarPedido).toHaveBeenCalledWith(
       pedidoDTOMock.id,
