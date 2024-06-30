@@ -26,6 +26,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SQSClient } from '@aws-sdk/client-sqs';
 import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/nova_cobranca/nova_cobranca.handler';
 import { FalhaCobrancaMessageHandler } from 'src/infrastructure/message_handlers/falha_cobranca/falha_cobranca.handler';
+import { PagamentoMessageHandler } from 'src/infrastructure/message_handlers/pagamento_confirmado/pag_confirmado.handler';
 
 @Module({
   imports: [
@@ -59,18 +60,35 @@ import { FalhaCobrancaMessageHandler } from 'src/infrastructure/message_handlers
               }),
             },
             {
-              name: configService.getOrThrow<string>(
+              name: configService.get<string>(
                 'NOME_FILA_FALHA_COBRANCA',
               ),
-              queueUrl: configService.getOrThrow<string>(
+              queueUrl: configService.get<string>(
                 'URL_FILA_FALHA_COBRANCA',
               ),
-              region: configService.getOrThrow<string>(
+              region: configService.get<string>(
                 'REGION_FILA_FALHA_COBRANCA',
               ),
               sqs: new SQSClient({
-                region: configService.getOrThrow<string>(
+                region: configService.get<string>(
                   'REGION_FILA_FALHA_COBRANCA',
+                ),
+                endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
+              }),
+            },
+            {
+              name: configService.getOrThrow<string>(
+                'NOME_FILA_PAGAMENTO_CONFIRMADO',
+              ),
+              queueUrl: configService.getOrThrow<string>(
+                'URL_FILA_PAGAMENTO_CONFIRMADO',
+              ),
+              region: configService.getOrThrow<string>(
+                'REGION_FILA_PAGAMENTO_CONFIRMADO',
+              ),
+              sqs: new SQSClient({
+                region: configService.getOrThrow<string>(
+                  'REGION_FILA_PAGAMENTO_CONFIRMADO',
                 ),
                 endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
               }),
@@ -103,6 +121,7 @@ import { FalhaCobrancaMessageHandler } from 'src/infrastructure/message_handlers
     Logger,
     CobrancaMessageHandler,
     FalhaCobrancaMessageHandler,
+    PagamentoMessageHandler,
     PedidoUseCase,
     {
       provide: IPedidoUseCase,
