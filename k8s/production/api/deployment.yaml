@@ -110,6 +110,21 @@ spec:
                 secretKeyRef:
                   name: sqs-fila-falha-cobranca-secret
                   key: REGION_FILA_FALHA_COBRANCA
+            - name: NOME_FILA_PAGAMENTO_CONFIRMADO
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-pagamento-confirmado-secret
+                  key: NOME_FILA_PAGAMENTO_CONFIRMADO
+            - name: URL_FILA_PAGAMENTO_CONFIRMADO
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-pagamento-confirmado-secret
+                  key: URL_FILA_PAGAMENTO_CONFIRMADO
+            - name: REGION_FILA_PAGAMENTO_CONFIRMADO
+              valueFrom:
+                secretKeyRef:
+                  name: sqs-fila-pagamento-confirmado-secret
+                  key: REGION_FILA_PAGAMENTO_CONFIRMADO
           ports:
             - containerPort: 3002
           resources:

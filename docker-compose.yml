@@ -59,6 +59,9 @@ services:
       NOME_FILA_FALHA_COBRANCA: ${NOME_FILA_FALHA_COBRANCA:-falha-cobranca}
       URL_FILA_FALHA_COBRANCA: http://localstack:4566/000000000000/falha-cobranca
       REGION_FILA_FALHA_COBRANCA: ${REGION_FILA_FALHA_COBRANCA:-us-east-1}
+      NOME_FILA_PAGAMENTO_CONFIRMADO: pagamento-confirmado
+      URL_FILA_PAGAMENTO_CONFIRMADO: http://localstack:4566/000000000000/pagamento-confirmado
+      REGION_FILA_PAGAMENTO_CONFIRMADO: ${REGION_FILA_PAGAMENTO_CONFIRMADO:-us-east-1}
     restart: always
     networks:
       - rms
