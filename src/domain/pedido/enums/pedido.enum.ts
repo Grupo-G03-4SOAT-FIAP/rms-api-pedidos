@@ -2,6 +2,7 @@ export enum StatusPagamento {
   PAGO = 'pago',
   RECUSADO = 'recusado',
   PENDENTE = 'pendente',
+  ERRO = 'erro',
 }
 
 export enum StatusPedido {
