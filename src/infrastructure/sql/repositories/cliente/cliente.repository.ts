@@ -51,7 +51,7 @@ export class ClienteRepository implements IClienteRepository {
   }
 
   async excluirCliente(clienteId: string): Promise<void> {
-    await this.clienteRepository.softDelete({ id: clienteId });
+    await this.clienteRepository.delete({ id: clienteId });
   }
 
   async buscarClientePorId(clienteId: string): Promise<ClienteEntity | null> {
