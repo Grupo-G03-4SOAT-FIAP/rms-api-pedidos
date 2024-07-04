@@ -7,14 +7,11 @@ import {
   StatusPedido,
 } from 'src/domain/pedido/enums/pedido.enum';
 import { IPedidoUseCase } from 'src/domain/pedido/interfaces/pedido.use_case.port';
-import {
-  AtualizaPedidoDTO,
-  PedidoDTO,
-} from 'src/presentation/rest/v1/presenters/pedido/pedido.dto';
+import { AtualizaPedidoDTO } from 'src/presentation/rest/v1/presenters/pedido/pedido.dto';
 
 @Injectable()
-export class FalhaCobrancaMessageHandler {
-  private _nomeFilaFalhaCobranca: string;
+export class FalhaPagamentoMessageHandler {
+  private _nomeFilaFalhaPagamento: string;
 
   constructor(
     private readonly logger: Logger,
@@ -22,29 +19,28 @@ export class FalhaCobrancaMessageHandler {
     @Inject(IPedidoUseCase)
     private readonly pedidoUseCase: IPedidoUseCase,
   ) {
-    this._nomeFilaFalhaCobranca = this.configService.getOrThrow<string>(
-      'NOME_FILA_FALHA_COBRANCA',
+    this._nomeFilaFalhaPagamento = this.configService.getOrThrow<string>(
+      'NOME_FILA_FALHA_PAGAMENTO',
     );
   }
 
-  @SqsMessageHandler('falha-cobranca', false)
+  @SqsMessageHandler('falha-pagamento', false)
   public async handleMessage(message: Message) {
     this.logger.debug(
-      `Nova mensagem recebida na fila falha-cobranca`,
+      `Nova mensagem recebida na fila falha-pagamento`,
       JSON.stringify(message),
     );
     try {
-      const parsedBody: any = JSON.parse(message.Body);
-      const pedidoDTO: PedidoDTO = parsedBody as unknown as PedidoDTO;
-      this.logger.warn(
-        `Cancelando o pedido ${pedidoDTO.id} devido a falha ao gerar cobrança...`,
-      );
+      const idPedido: string = message.Body;
+      this.logger.warn(`Cancelando o pedido ${idPedido}...`);
       const atualizaPedidoDTO: AtualizaPedidoDTO = {
+        statusPagamento: StatusPagamento.RECUSADO,
         statusPedido: StatusPedido.CANCELADO,
-        statusPagamento: StatusPagamento.ERRO,
       };
-      await this.pedidoUseCase.editarPedido(pedidoDTO.id, atualizaPedidoDTO);
-      this.logger.warn(`O pedido ${pedidoDTO.id} foi cancelado`);
+      this.logger.warn(
+        `O pedido ${idPedido} foi cancelado`,
+      );
+      await this.pedidoUseCase.editarPedido(idPedido, atualizaPedidoDTO);
     } catch (error) {
       this.logger.error(
         `Ocorreu um erro ao processar a mensagem com MessageId ${message?.MessageId}`,
@@ -54,7 +50,7 @@ export class FalhaCobrancaMessageHandler {
     }
   }
 
-  @SqsConsumerEventHandler('falha-cobranca', 'processing_error')
+  @SqsConsumerEventHandler('falha-pagamento', 'processing_error')
   public onProcessingError(error: Error, message: Message) {
     this.logger.error(
       `Ocorreu um erro ao processar a mensagem com MessageId ${message?.MessageId}`,

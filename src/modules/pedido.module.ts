@@ -27,6 +27,7 @@ import { SQSClient } from '@aws-sdk/client-sqs';
 import { CobrancaMessageHandler } from 'src/infrastructure/message_handlers/nova_cobranca/nova_cobranca.handler';
 import { FalhaCobrancaMessageHandler } from 'src/infrastructure/message_handlers/falha_cobranca/falha_cobranca.handler';
 import { PagamentoMessageHandler } from 'src/infrastructure/message_handlers/pagamento_confirmado/pag_confirmado.handler';
+import { FalhaPagamentoMessageHandler } from 'src/infrastructure/message_handlers/falha_pagamento/falha_pag.handler';
 
 @Module({
   imports: [
@@ -93,6 +94,23 @@ import { PagamentoMessageHandler } from 'src/infrastructure/message_handlers/pag
                 endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
               }),
             },
+            {
+              name: configService.getOrThrow<string>(
+                'NOME_FILA_FALHA_PAGAMENTO',
+              ),
+              queueUrl: configService.getOrThrow<string>(
+                'URL_FILA_FALHA_PAGAMENTO',
+              ),
+              region: configService.getOrThrow<string>(
+                'REGION_FILA_FALHA_PAGAMENTO',
+              ),
+              sqs: new SQSClient({
+                region: configService.getOrThrow<string>(
+                  'REGION_FILA_FALHA_PAGAMENTO',
+                ),
+                endpoint: configService.get<string>('LOCALSTACK_ENDPOINT'),
+              }),
+            },
           ],
           producers: [
             {
@@ -122,6 +140,7 @@ import { PagamentoMessageHandler } from 'src/infrastructure/message_handlers/pag
     CobrancaMessageHandler,
     FalhaCobrancaMessageHandler,
     PagamentoMessageHandler,
+    FalhaPagamentoMessageHandler,
     PedidoUseCase,
     {
       provide: IPedidoUseCase,
