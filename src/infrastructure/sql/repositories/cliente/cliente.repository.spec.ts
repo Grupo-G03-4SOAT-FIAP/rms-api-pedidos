@@ -13,6 +13,7 @@ import {
 import { SQLDTOFactory } from '../../factories/sql.dto.factory';
 
 class SoftDeleteMock {
+  delete: jest.Mock = jest.fn();
   softDelete: jest.Mock = jest.fn();
 }
 
@@ -126,7 +127,7 @@ describe('ClienteRepository', () => {
   });
 
   it('deve excluir um cliente no formato softdelete', async () => {
-    clienteSoftDeleteMock.softDelete.mockResolvedValue({ affected: 1 });
+    clienteSoftDeleteMock.delete.mockResolvedValue({ affected: 1 });
 
     const clienteService = new ClienteRepository(
       clienteSQLDTOFactoryMock as any,
@@ -135,7 +136,7 @@ describe('ClienteRepository', () => {
 
     await clienteService.excluirCliente(clienteId);
 
-    expect(clienteSoftDeleteMock.softDelete).toHaveBeenCalledWith({
+    expect(clienteSoftDeleteMock.delete).toHaveBeenCalledWith({
       id: clienteId,
     });
   });

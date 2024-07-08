@@ -26,11 +26,11 @@ export class PedidoModel {
   })
   itensPedido: ItemPedidoModel[];
 
-  @ManyToOne(() => ClienteModel, { nullable: true })
+  @ManyToOne(() => ClienteModel, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn({ name: 'id_cliente' })
   cliente: ClienteModel | null;
 
-  @OneToOne(() => ClientePedidoModel, { nullable: true })
+  @OneToOne(() => ClientePedidoModel, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn({ name: 'id_cliente_pedido' })
   clientePedido: ClientePedidoModel | null;
 
