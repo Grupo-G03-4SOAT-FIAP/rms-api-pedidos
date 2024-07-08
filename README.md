@@ -1,4 +1,4 @@
-<img src="https://github.com/Grupo-G03-4SOAT-FIAP/rms-backend/raw/main/docs/img/bope-faca-na-carveira-knife-skull-logo.png" alt="BOPE" title="BOPE" align="right" height="60" />
+<img src="https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/raw/main/docs/img/bope-faca-na-carveira-knife-skull-logo.png" alt="BOPE" title="BOPE" align="right" height="60" />
 
 # Restaurant Management System
 ## API de Pedidos
@@ -8,6 +8,8 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Grupo-G03-4SOAT-FIAP_rms-api-pedidos&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Grupo-G03-4SOAT-FIAP_rms-api-pedidos)
 
 Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvido pelo grupo *"BOPE"* G03 da turma 4SOAT para o Tech Challenge da [Pós Tech em Software Architecture da FIAP](https://postech.fiap.com.br/curso/software-architecture/).
+
+▶️[Clique aqui para assistir à apresentação no YouTube!](https://youtu.be/cAcMBVsJuMs?si=Zx9kUFh34gVlwcan)
 
 ### O PROBLEMA
 
@@ -34,16 +36,6 @@ Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvi
 <br>
 
 ![overview-microsservicos](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/assets/5115895/8eabc62c-4381-45ce-a101-42883dd1f087)
-
-<details>
-
-<summary>Por que optamos por uma SAGA coreografada?</summary>
-
-## SAGA Coreografada
-
-Nossa aplicação é relativamente simples. Dada a simplicidade da nossa aplicação, no nosso cenário não corremos o risco de enfrentar problemas de dependências cíclicas, nem tampouco enfrentamos dificuldades em fazer o entendimento e o mapeamento de todos os membros envolvidos na SAGA, já que a nossa SAGA possui poucos membros. Sabendo disso, dado o nosso contexto, optamos pela SAGA coreografada, conforme recomendado por Chris Richardson no livro "[Microservices Patterns](https://www.amazon.com.br/Microservice-Patterns-examples-Chris-Richardson/dp/1617294543)", indo de encontro também a recomendação feita pelo professor durante as aulas.
-
-</details>
 
 ## Executar a aplicação
 
@@ -126,9 +118,26 @@ Você pode conectar-se a instância de banco de dados PostgreSQL usando o [pgAdm
 
 ## Documentação
 
-A documentação do projeto está disponível no [GitHub Wiki](https://github.com/Grupo-G03-4SOAT-FIAP/rms-backend/wiki).
+A documentação do projeto está disponível no [GitHub Wiki](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/wiki).
 
-## Arquitetura
+## SAGA
+
+Padrão implementado: [Coreografia](https://microservices.io/patterns/data/saga.html)
+
+<details>
+
+<summary>Por que optamos por uma SAGA coreografada?</summary>
+
+## SAGA Coreografada
+
+Nossa aplicação é relativamente simples. Dada a simplicidade da nossa aplicação, no nosso cenário não corremos o risco de enfrentar problemas de dependências cíclicas, nem tampouco enfrentamos dificuldades em fazer o entendimento e o mapeamento de todos os membros envolvidos na SAGA, já que a nossa SAGA possui poucos membros. Sabendo disso, dado o nosso contexto, optamos pela SAGA coreografada, conforme recomendado por Chris Richardson no livro "[Microservices Patterns](https://www.amazon.com.br/Microservice-Patterns-examples-Chris-Richardson/dp/1617294543)", indo de encontro também a recomendação feita pelo professor durante as aulas.
+
+</details>
+
+![RMS_SAGA drawio](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/assets/5115895/51d9d7e4-6121-4bbb-b08e-a447f33e327a)
+*Clique na imagem para ampliar.*
+
+## Padrão Arquitetural
 
 Architectural Pattern: [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) + [Screaming Architecture](https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html)
 
@@ -211,12 +220,14 @@ https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-privacidade
 
 ## Relatório de Impacto à Proteção de Dados Pessoais (RIPD)
 
-O Relatório de Impacto à Proteção de Dados Pessoais (RIPD) está disponível na pasta `/docs/RIPD`
+O Relatório de Impacto à Proteção de Dados Pessoais (RIPD) está disponível na pasta `/docs/RIPD`\
+[Clique aqui para acessar](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/tree/main/docs/RPID)↗️
 
 ## OWASP ZAP
 
 #### Reports OWASP ZAP API Scan
-Os reports de "antes" e "depois" encontram-se na pasta `/docs/zap-scanning-report`
+Os reports de "antes" e "depois" encontram-se na pasta `/docs/zap-scanning-report`\
+[Clique aqui para acessar](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/tree/main/docs/zap-scanning-report)↗️
 
 <details>
 
