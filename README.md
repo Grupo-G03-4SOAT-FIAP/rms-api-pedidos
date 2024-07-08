@@ -206,6 +206,9 @@ https://github.com/Grupo-G03-4SOAT-FIAP/rms-cognito-triggers
 Infrastructure as code (IaC) com Terraform\
 https://github.com/Grupo-G03-4SOAT-FIAP/rms-iac
 
+API de Privacidade\
+https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-privacidade
+
 ## Relatório de Impacto à Proteção de Dados Pessoais (RIPD)
 
 O Relatório de Impacto à Proteção de Dados Pessoais (RIPD) está disponível na pasta `/docs/RIPD`
