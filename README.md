@@ -31,11 +31,9 @@ Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvi
 ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
 
-![mercado-pago](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-monolito/assets/5115895/ad2f673e-ba14-4824-b2dd-24dbbce72bf3)
-
 <br>
 
-![microservices](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/assets/5115895/a258c18d-869e-42e1-8a15-8dad3a7f380f)
+![overview-microsservicos](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/assets/5115895/8eabc62c-4381-45ce-a101-42883dd1f087)
 
 <details>
 
@@ -54,9 +52,10 @@ Nossa aplicação é relativamente simples. Dada a simplicidade da nossa aplica�
 3. Navegue até a pasta raiz do projeto usando o Terminal;
 4. Faça uma cópia do arquivo `.env.template` com o nome `.env` e preencha as variáveis de ambiente dentro dele;
 5. Execute o comando `npm install` para instalar os pacotes npm;
-6. Use o comando `npm run start` para iniciar a aplicação.
-7. Execute o comando `docker-compose up -d db-pedidos` para iniciar o container do banco de dados;
-8. Acesse o Swagger em http://localhost:3000/swagger/
+6. Execute o comando `docker-compose up -d db-pedidos` para iniciar o container do banco de dados;
+7. Execute o comando `docker-compose up -d localstack` para iniciar o localstack;
+8. Use o comando `npm run start` para iniciar a aplicação.
+9. Acesse o Swagger em http://localhost:3002/swagger/
 
 <details>
 
@@ -67,8 +66,8 @@ Nossa aplicação é relativamente simples. Dada a simplicidade da nossa aplica�
 1. Clone este repositório;
 2. Navegue até a pasta raiz do projeto usando o Terminal;
 3. Faça uma cópia do arquivo `.env.template` com o nome `.env` e preencha as variáveis de ambiente dentro dele;
-4. Execute o comando `docker-compose up -d`
-5. Acesse o Swagger em http://localhost:3000/swagger/
+4. Execute o comando `docker-compose up -d --build --force-recreate`
+5. Acesse o Swagger em http://localhost:3002/swagger/
 
 </details>
 
@@ -82,14 +81,14 @@ Nossa aplicação é relativamente simples. Dada a simplicidade da nossa aplica�
 2. Navegue até a pasta raiz do projeto usando o Terminal;
 3. Use o comando `docker build -t rms-api-pedidos:latest .` para gerar a imagem de container da aplicação;
 4. Use o comando `kubectl apply -f k8s/development/postgres/namespace.yaml -f k8s/development/postgres/pvc-pv.yaml -f k8s/development/postgres/config.yaml -f k8s/development/postgres/secrets.yaml -f k8s/development/postgres/deployment.yaml -f k8s/development/postgres/service.yaml` para fazer deploy do banco de dados;
-5. Use o comando `kubectl apply -f k8s/development/bff/namespace.yaml -f k8s/development/bff/config.yaml -f k8s/development/bff/secrets.yaml -f k8s/development/bff/deployment.yaml -f k8s/development/bff/service.yaml -f k8s/development/bff/hpa.yaml` para fazer deploy da aplicação;
-6. Acesse o Swagger em http://localhost:3000/swagger/
+5. Use o comando `kubectl apply -f k8s/development/api/namespace.yaml -f k8s/development/api/config.yaml -f k8s/development/api/secrets.yaml -f k8s/development/api/deployment.yaml -f k8s/development/api/service.yaml -f k8s/development/api/hpa.yaml` para fazer deploy da aplicação;
+6. Acesse o Swagger em http://localhost:3002/swagger/
 
 > Para remover a aplicação do Kubernetes, use o comando `kubectl delete namespace rms`
 
 #### Sobre os Secrets do Kubernetes
 
-Em seu ambiente de desenvolvimento, por questão de segurança, abra os arquivos `/k8s/development/postgres/secrets.yaml` e `/k8s/development/bff/secrets.yaml` na pasta `/k8s/development` e preencha os valores sensíveis manualmente.
+Em seu ambiente de desenvolvimento, por questão de segurança, abra os arquivos `/k8s/development/postgres/secrets.yaml` e `/k8s/development/api/secrets.yaml` na pasta `/k8s/development` e preencha os valores sensíveis manualmente.
 
 > No ambiente de produção os Secrets do Kubernetes são gerenciados pelo AWS Secrets Manager.
 
@@ -103,18 +102,7 @@ Para mais informações visite a página [Boas práticas para secrets do Kuberne
 
 ## Instruções para testar o pagamento de pedidos através do QR Code do Mercado Pago
 
-Para testar o pagamento de pedidos usando o QR Code do Mercado Pago você vai precisar criar uma Aplicação no [portal do Mercado Pago Developers](https://www.mercadopago.com.br/developers/pt).
-
-1. Siga as instruções na página [Pré-requisitos](https://www.mercadopago.com.br/developers/pt/docs/qr-code/pre-requisites) no Mercado Pago Developers;
-2. Após criar as contas de teste do `Vendedor` e do `Comprador`, abra uma janela anônima (Ctrl + Shift + P) no navegador e faça login no [portal do Mercado Pago Developers](https://www.mercadopago.com.br/developers/pt) **usando o usuário e senha da conta de teste do Vendedor**;
-3. Após fazer login no portal do Mercado Pago Developers usando o usuário e senha da conta de teste do **Vendedor**, crie uma aplicação de testes **dento da conta de testes do Vendedor**.
-4. Anote o `User ID` que aparece em baixo de "Detalhes da aplicação" na página inicial da aplicação de testes dentro da conta de testes do Vendedor;
-5. Clique em "Credenciais de teste" no menu do lado esquerdo da tela e anote o `Access Token` da aplicação de testes;
-6. Usando o [Postman](https://www.postman.com/), cadastre uma **Loja** conforme instruções na página [Criar loja](https://www.mercadopago.com.br/developers/pt/reference/stores/_users_user_id_stores/post). Anote o `id` da Loja que você cadastrou;
-7. Usando o [Postman](https://www.postman.com/), cadastre um **Caixa** conforme instruções na página [Criar caixa](https://www.mercadopago.com.br/developers/pt/reference/pos/_pos/post). Anote o `external_id` do Caixa que você cadastrou;
-8. Preencha as variáveis de ambiente no arquivo `.env` com o `User ID` e `Access Token` da aplicação de testes e com o `id` da Loja e o `external_id` do Caixa que você de cadastrou anteriormente através da API do Mercado Pago;
-9. Ative a feature flag `ENABLE_MERCADOPAGO=true` no arquivo `.env`
-10. Execute a aplicação.
+Para testar o pagamento de pedidos usando o QR Code do Mercado Pago siga o passo a passo disponível na documentação da [api-pagamentos](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pagamentos?tab=readme-ov-file#testar-o-pagamento-de-pedidos-atrav%C3%A9s-do-qr-code-do-mercado-pago).
 
 </details>
 
@@ -153,8 +141,6 @@ Cloud provider: AWS
 
 ![Diagrama de arquitetura cloud drawio](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-monolito/assets/5115895/7cf5b858-5c7e-47d6-9def-2cda7e470134)
 *Clique na imagem para ampliar.*
-
-![registry_and_authorizer_dark](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-monolito/assets/5115895/51c34341-099e-4395-a2a9-acdb62cc6c71)
 
 ## Como contribuir
 
@@ -219,6 +205,10 @@ https://github.com/Grupo-G03-4SOAT-FIAP/rms-cognito-triggers
 
 Infrastructure as code (IaC) com Terraform\
 https://github.com/Grupo-G03-4SOAT-FIAP/rms-iac
+
+## Relatório de Impacto à Proteção de Dados Pessoais (RIPD)
+
+O Relatório de Impacto à Proteção de Dados Pessoais (RIPD) está disponível na pasta `/docs/RIPD`
 
 ## OWASP ZAP
 
