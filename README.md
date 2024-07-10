@@ -218,11 +218,6 @@ https://github.com/Grupo-G03-4SOAT-FIAP/rms-iac
 API de Privacidade\
 https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-privacidade
 
-## Relatório de Impacto à Proteção de Dados Pessoais (RIPD)
-
-O Relatório de Impacto à Proteção de Dados Pessoais (RIPD) está disponível na pasta `/docs/RIPD`\
-[Clique aqui para acessar](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/tree/main/docs/RPID)↗️
-
 ## OWASP ZAP
 
 #### Reports OWASP ZAP API Scan
