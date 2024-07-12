@@ -1,7 +1,7 @@
 <img src="https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/raw/main/docs/img/bope-faca-na-carveira-knife-skull-logo.png" alt="BOPE" title="BOPE" align="right" height="60" />
 
 # Restaurant Management System
-## API de Pedidos
+## Microsserviço de Pedidos
 
 [![Deploy to Amazon EKS](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/actions/workflows/deploy.yml/badge.svg)](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/actions/workflows/deploy.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Grupo-G03-4SOAT-FIAP_rms-api-pedidos&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Grupo-G03-4SOAT-FIAP_rms-api-pedidos)
@@ -100,13 +100,15 @@ Para testar o pagamento de pedidos usando o QR Code do Mercado Pago siga o passo
 
 ## Banco de Dados
 
-Você pode conectar-se a instância de banco de dados PostgreSQL usando o [pgAdmin](https://www.pgadmin.org/download/), o terminal através do [psql](https://www.postgresql.org/download/), ou qualquer outra IDE ou ferramenta compatível.
+Entendemos que o modelo relacional é o que mais se adequa ao nosso problema de negócio, contexto atual e requisitos no Microsserviço de Pedidos. Leia mais sobre as motivações para adoção do modelo relacional no [Architectural Decision Record (ADR)](https://github.com/Grupo-G03-4SOAT-FIAP/rms-api-pedidos/wiki/Decis%C3%A3o-de-Arquitetura-para-Banco-de-Dados-da-API-RMS).
 
 <details>
 
 <summary>Quais são os parâmetros da conexão e credenciais para acesso ao banco de dados PostgreSQL?</summary>
 
 <br>
+
+Você pode conectar-se a instância de banco de dados PostgreSQL usando o [pgAdmin](https://www.pgadmin.org/download/), o terminal através do [psql](https://www.postgresql.org/download/), ou qualquer outra IDE ou ferramenta compatível.
 
 > Host: localhost\
 > Porta: 5432 (padrão)\
