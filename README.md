@@ -9,7 +9,7 @@
 
 Microsserviço de Pedidos do Sistema de Gestão de Restaurantes (RMS) desenvolvido pelo grupo *"BOPE"* G03 da turma 4SOAT para o Tech Challenge da [Pós Tech em Software Architecture da FIAP](https://postech.fiap.com.br/curso/software-architecture/).
 
-▶️[Clique aqui para assistir à apresentação no YouTube!](https://youtu.be/cAcMBVsJuMs?si=Zx9kUFh34gVlwcan)
+▶️[Clique aqui para assistir à apresentação no YouTube!](https://www.youtube.com/watch?v=1Kjw_gMVvWk)
 
 ### O PROBLEMA
 
